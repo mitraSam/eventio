@@ -1,0 +1,33 @@
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const cssnano = require("cssnano");
+
+const MiniCssPlugin = new MiniCssExtractPlugin({
+  filename: "styles.css"
+});
+
+const OptimizeCSSPlugin = new OptimizeCSSAssetsPlugin({
+  cssProcessor: cssnano,
+  cssProcessorOptions: {
+    discardComments: {
+      removeAll: true
+    },
+    // Run cssnano in safe mode to avoid
+    // potentially unsafe transformations.
+    safe: true
+  },
+  canPrint: false
+});
+
+module.exports = {
+  entry: "./js/components/ClientApp.jsx",
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+      }
+    ]
+  },
+  plugins: [MiniCssPlugin, OptimizeCSSPlugin]
+};
