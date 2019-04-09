@@ -5,6 +5,10 @@ import "styles/header.scss";
 import WithCurrentUser from "../containers/WithCurrentUser";
 
 class Header extends Component {
+  componentDidMount() {
+    this.props.checkTokenExp();
+  }
+
   render() {
     const { currentUser, onLogin } = this.props;
     const onLoginClass = onLogin ? "onLogin" : "";
