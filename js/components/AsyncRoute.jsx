@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import EventsPlaceholder from "./EventsPlaceholder";
+import WithCurrentUser from "../containers/WithCurrentUser";
 
 class AsyncRoute extends Component {
   state = {
@@ -24,6 +25,12 @@ class AsyncRoute extends Component {
   }
 
   render() {
+    const { history } = this.props.props;
+    const { protect, currentUser } = this.props;
+    if (protect && !currentUser.id) {
+      history.push("/login");
+      return null;
+    }
     const { loaded } = this.state;
     const { props } = this.props;
 
@@ -34,4 +41,4 @@ class AsyncRoute extends Component {
   }
 }
 
-export default AsyncRoute;
+export default WithCurrentUser(AsyncRoute);

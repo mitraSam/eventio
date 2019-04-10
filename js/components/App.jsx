@@ -22,6 +22,7 @@ class App extends Component {
               component={props => (
                 <AsyncRoute
                   props={props}
+                  protect={true}
                   path="events"
                   loadingComponent={import("./Events")}
                 />
@@ -30,12 +31,15 @@ class App extends Component {
             <Route
               exact
               path="/login"
-              component={props => (
-                <AsyncRoute
-                  props={props}
-                  loadingComponent={import("./PageLayoutLogin")}
-                />
-              )}
+              component={props => {
+                console.log(store);
+                return (
+                  <AsyncRoute
+                    props={props}
+                    loadingComponent={import("./PageLayoutLogin")}
+                  />
+                );
+              }}
             />
             <Route
               exact

@@ -1,14 +1,22 @@
 import { connect } from "react-redux";
 import { setCurrentUser } from "../actions";
-import { tokenAvailable } from "../Utils";
+import { removeUserToken, tokenAvailable } from "../Utils";
 
 const mapStateToProps = state => ({ currentUser: state.currentUser });
 const mapDispatchToProps = dispatch => ({
   setUser(userObj) {
     dispatch(setCurrentUser(userObj));
   },
-  checkTokenExp() {
-    if (!tokenAvailable()) dispatch(setCurrentUser({}));
+  tokenStillAvailable() {
+    if (!tokenAvailable()) {
+      dispatch(setCurrentUser({}));
+      return false;
+    }
+    return true;
+  },
+  logout() {
+    removeUserToken();
+    dispatch(setCurrentUser({}));
   }
 });
 
