@@ -1,0 +1,17 @@
+@import "main";
+.on404,.error-display{
+  h1{
+    font-size: 1.6em;
+    margin-bottom: 1em;
+  }
+  p{
+    color: $light-grey;
+    line-height: 1.2;
+  }
+}
+
+@media screen and (min-width: $large-vw) {
+.on404,.error-display{
+  text-align: left;
+}
+}

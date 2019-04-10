@@ -1,0 +1,132 @@
+@import "main";
+
+
+.form-component {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+  p{
+    display: flex;
+    flex-direction: column;
+  }
+  .error &__input {
+    border-bottom: 1px solid $error-pink;
+  }
+  legend{
+    font-size: 1.4em;
+    margin-bottom: .7em;
+    text-align: center;
+  }
+  sub{
+    color: $light-grey;
+    font-size: .9em;
+    margin-bottom: 3em;
+    text-align: center;
+  }
+
+
+  &__input {
+    display: block;
+    color: var(--dark-grey);
+    margin: 0 0 .5em;
+    font-size: 1.1em;
+    border: none;
+    border-bottom: 1px solid $lighter-grey;
+    padding-bottom: .5em;
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $dark-grey;
+    }
+
+    &[type="password"] {
+      letter-spacing: 5px;
+      font-size: .7em;
+      height: 2.5em;
+    }
+
+    @supports (-ms-ime-align:auto) {
+      letter-spacing: 0;
+      font-size: 1em;
+      height: auto;
+    }
+
+    &::placeholder{
+      color:$lighter-grey;
+      font-size: 1rem;
+      letter-spacing: initial;
+    }
+    &::placeholder::first-letter{
+      text-transform: uppercase;
+    }
+  }
+  &__input.error{
+      border-bottom: 1px solid $error-pink;
+
+  }
+  &__apiError{
+    color:var(--error-pink);
+    font-family: var(--main-font-medium);
+    font-size:.8em;
+    line-height: 1.6;
+    margin-bottom: 3em;
+    text-align: center;
+  }
+  &__bottomLink{
+    color: $lighter-grey;
+    font-size: .9em;
+    margin-top:2.5em;
+    text-decoration: none;
+    text-align: center;
+    em {
+      color: $light-grey;
+      font-family: $main-font-medium;
+      text-transform: uppercase;
+    }
+  }
+  &__submit{
+  @include btn($light-green);
+    &::-moz-focus-inner{
+      border: 0;
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+  &__annot {
+    text-align: left;
+    font-family: $main-font-light;
+    color: $lighter-grey;
+    font-size: .9em;
+    min-height: 1em;
+  }
+  &__annot:first-letter{
+    text-transform: uppercase;
+  }
+  &__input-error{
+    color: $error-pink;
+    font-size: .9em;
+    min-height: 1em;
+    margin-bottom: .7em;
+    text-align: left;
+  }
+  .form-component__annot:first-letter{
+    text-transform: uppercase;
+  }
+}
+
+
+/* for edge: can't style placeholder separate from input
+  so don't style password input separately
+ */
+
+@supports (-ms-ime-align:auto) {
+  .login__form--input[type="password"]{
+    letter-spacing: 0;
+    font-size: 1em;
+    height: auto;
+
+  }
+}

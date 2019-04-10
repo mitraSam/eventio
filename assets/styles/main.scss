@@ -1,0 +1,89 @@
+@import "reset";
+@import "fonts";
+@import "mixins";
+:root{
+    --main-font: "Hind-Regular";
+    --logo-font: "Hind-Bold";
+    --main-font-light: "Hind-Light";
+    --main-font-semiBold: "Hind-SemiBold";
+    --main-font-medium: "Hind-Medium";
+    --dark-grey: rgb(50,60,70);
+    --light-grey: rgb(149,159,169);
+    --lighter-grey: rgb(213,217,221);
+    --light-green: rgb(34,212,134);
+    --error-pink: rgb(255,76,137);
+    --small-vw: 40;
+}
+
+$lighter-grey:rgb(213,217,221);
+$error-pink:rgb(255,76,137);
+$lighter-grey: rgb(213,217,221);
+$light-grey:rgb(149,159,169);
+$grey: rgb(126,121,121);
+$dark-grey: rgb(50,60,70);
+$light-green: rgb(34,212,134);
+$off-white: rgb(249,249,251);
+
+$small-vw:40em;
+$medium-vw:60em;
+$large-vw:80em;
+
+$main-font-medium:"Hind-Medium";
+$main-font-semiBold: "Hind-SemiBold";
+$main-font-light:"Hind-Light";
+$main-font: "Hind-Regular";
+$second-font: "PlayfairDisplay-Regular";
+
+h1,h2,h3,h4,p,span,a,legend,sub,cite,time{
+    font-family: $main-font;
+}
+*{
+    box-sizing: border-box;
+}
+
+.form__component input::-ms-input-placeholder{
+    text-transform:capitalize;
+}
+.form__component input::placeholder{
+    text-transform:capitalize;
+}
+.form__component label{
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+}
+
+@mixin btn($color) {
+  text-transform: uppercase;
+  padding: 1.3em;
+  margin-left: auto;
+  margin-right: auto;
+  color:#fff;
+  background: $color;
+  border: none;
+  border-radius: 5px;
+  width: 18em;
+  margin-top: 4em;
+  font-family: $main-font-medium;
+  font-size: .9em;
+}
+
+@mixin arrow($color,$size){
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: $size $size 0 $size;
+  border-color: $color transparent transparent transparent;
+  display: inline-block;
+  left: 0;
+  content: "";
+  position: relative;
+}
+button:focus{
+  outline: none;
+}

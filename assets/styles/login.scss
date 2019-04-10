@@ -1,0 +1,49 @@
+@import "main";
+
+@media screen and (min-width:40em) {
+    .landing {
+        font-size: 1.2em;
+
+        .form-component__input::placeholder {
+            font-size: 1.1rem;
+        }
+    }
+}
+@media screen and (min-width:$medium-vw) {
+    .landing {
+        font-size: 1.3em;
+
+        .form-component__input::placeholder {
+            font-size: 1.2rem;
+        }
+
+    }
+}
+@media screen and (min-width: $large-vw) {
+    .landing {
+        font-size: 1em;
+        text-align: left;
+        .form-component{
+            width: 21em;
+            legend{
+                text-align: left;
+            }
+            sub{
+                text-align: left;
+            }
+            &__submit{
+                margin-left: initial;
+                padding: 1em;
+                width: 16em;
+            }
+            &__input::placeholder{
+                font-size: 1rem;
+            }
+            &__bottomLink{
+                display: none;
+
+            }
+        }
+
+    }
+}

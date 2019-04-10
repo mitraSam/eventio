@@ -1,0 +1,97 @@
+@import "main";
+
+.wrapper{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right:auto
+}
+
+.landing{
+    main {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+        &__content{
+        text-align:center;
+        padding: 0 2em;
+    }
+    &__banner{
+        display: none;
+
+    }
+    &__refresh{
+        @include btn($dark-grey)
+    }
+}
+
+@media screen and (min-width: $small-vw) {
+    .landing{
+        max-width: 70vw;
+    }
+}
+@media screen and (min-width: $large-vw) {
+    .wrapper{
+        max-width: initial;
+        display: flex;
+        justify-content: initial;
+    }
+
+    .landing{
+        .mainHeader{
+            position: absolute;
+            &__logo{
+                color:#fff;
+            }
+        }
+        main {
+            display: flex;
+            flex: 1;
+        }
+            &__content{
+            display: flex;
+            width: 75vw;
+            padding-left: 20vw;
+            align-content: center;
+            align-items: center;
+
+        }
+        &__banner{
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+            color:#fff;
+            padding: 2.5em;
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/trooper.jpg');
+            background-position: center center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            blockquote{
+                margin-top: auto;
+            }
+            p{
+                font-family: $second-font;
+                font-size: 1.7em;
+                margin-bottom: .8em;
+            }
+            hr{
+                width: .7em;
+                border:none;
+                height: 2px;
+                background: $light-green;
+            }
+            cite{
+                color:$light-grey;
+                margin-top:.5em;
+                font-size: .9em;
+            }
+        }
+    }
+
+
+}
