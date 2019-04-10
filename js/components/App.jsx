@@ -1,16 +1,65 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
 import { Route } from "react-router-dom";
 
-import Landing from "./Landing";
+import store from "../store";
+import Landing from "./PageLayout";
 
+import AsyncRoute from "./AsyncRoute";
 
-const App = () => (
-  <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Landing} />
-      </Switch>
-  </BrowserRouter>
-);
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Provider store={store}>
+          <Switch>
+            <Route exact path="/" component={Landing()} />
+
+            <Route
+              exact
+              path="/events"
+              component={props => (
+                <AsyncRoute
+                  props={props}
+                  path="events"
+                  loadingComponent={import("./Events")}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/login"
+              component={props => (
+                <AsyncRoute
+                  props={props}
+                  loadingComponent={import("./PageLayoutLogin")}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/signup"
+              component={props => (
+                <AsyncRoute
+                  props={props}
+                  loadingComponent={import("./PageLayoutSignUp")}
+                />
+              )}
+            />
+            <Route
+              component={props => (
+                <AsyncRoute
+                  props={props}
+                  loadingComponent={import("./PageLayout404")}
+                />
+              )}
+            />
+          </Switch>
+        </Provider>
+      </BrowserRouter>
+    );
+  }
+}
 
 export default App;

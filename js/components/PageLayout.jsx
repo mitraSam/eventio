@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import "styles/main";
-import "styles/landing";
+import "styles/pagelayout";
 
 import Header from "./Header";
 
-const Landing = (ChildComponent, login) =>
+const Landing = (ChildComponent, onLogin) =>
   class Wrapper extends Component {
     render() {
       const bannerText = "“Great,kid. Don't get cocky.”";
       return (
-        <div className="wrapper">
-          <Header onLogin={login} />
-          <main className="landing">
+        <div className="landing wrapper">
+          <Header history={this.props.history} hideLink={onLogin} />
+          <main>
             <section className="landing__banner">
               <blockquote>
                 <p>{bannerText}</p>
