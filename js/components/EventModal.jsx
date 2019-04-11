@@ -1,22 +1,49 @@
-import React, { Component } from "react";
-import Form2 from "./Form2";
+import React from "react";
 import { getUserToken, postData, tokenAvailable } from "../Utils";
 import ErrorDisplay from "./ErrorDisplay";
+import "styles/form";
+import FormClass from "./FormClass";
 
-class EventModal extends Component {
+class EventModal extends FormClass {
   state = {
-    apiError: false
+    apiError: "",
+    serverError: "",
+    title: { value: "", error: "" },
+    description: { value: "", error: "" },
+    capacity: { value: "", error: "" },
+    date: { value: "", error: "" },
+    time: { value: "", error: "" },
+    startsAt: "",
+    fields: ["title", "description", "capacity", "date", "time"]
   };
 
-  handleSubmit = data => {
-    const { addEvent } = this.props;
-    if (tokenAvailable()) {
-      const token = getUserToken();
-      console.log(addEvent);
-      postData("events", data, token)
-        .then(addEvent)
-        .catch(this.handleApiError);
+  handleSubmit = e => {
+    e.preventDefault();
+    if (!this.checkForEmptyInputs() && tokenAvailable()) {
+      const { addEvent } = this.props;
+      if (tokenAvailable()) {
+        const token = getUserToken();
+        console.log(addEvent);
+        const data = this.dataFromFields();
+        postData("events", data, token)
+          .then(addEvent)
+          .catch(this.handleApiError);
+      }
     }
+  };
+
+  dataFromFields = () => {
+    const { title, description, capacity, startsAt, time } = this.state;
+    console.log(time);
+    const t = time.value.split(":");
+    startsAt.setHours(t[0]);
+    startsAt.setMinutes(t[1]);
+    return {
+      title: title.value,
+      description: description.value,
+      capacity: capacity.value,
+      startsAt
+    };
   };
 
   handleApiError = ({ response }) => {
@@ -44,28 +71,129 @@ class EventModal extends Component {
     return { capacity, title, description, startsAt };
   }
   render() {
-    const { apiError, serverError } = this.state;
+    const {
+      apiError,
+      serverError,
+      title,
+      description,
+      date,
+      time,
+      capacity
+    } = this.state;
+    const error = apiError ? "error" : "";
+
     if (serverError)
       return (
         <div className="events error">
           <ErrorDisplay />
         </div>
       );
+
     return (
       <div className="events__form-wrapper">
         <button onClick={this.props.closeModal} className="events__close-modal">
           <span>Close</span>
         </button>
-        <Form2
-          title="Create new event."
-          byline="Enter details below"
-          fields={["title", "description", "date", "time", "capacity"]}
-          btnLabel="Create new event"
-          sendData={this.handleSubmit}
-          setupData={this.setupData}
-          apiError={apiError}
-          clearApiError={this.clearApiError}
-        />
+        <form
+          noValidate
+          className={`form-component ${error}`}
+          onSubmit={this.handleSubmit}
+        >
+          <legend>Create new event</legend>
+          {apiError ? (
+            <p className="form-component__apiError">{apiError}</p>
+          ) : (
+            <sub>Enter your details below</sub>
+          )}
+          <p>
+            <span className="form-component__annot">
+              {title.value ? "Title" : ""}
+            </span>
+            <input
+              type="text"
+              placeholder="title"
+              className={`form-component__input ${error}`}
+              onChange={this.handleText}
+              name="title"
+              value={title.value}
+            />
+            <span className="form-component__input-error">
+              {title.error ? title.error : ""}
+            </span>
+          </p>
+          <p>
+            <span className="form-component__annot">
+              {description.value ? "Description" : ""}
+            </span>
+            <input
+              type="text"
+              placeholder="Description"
+              className={`form-component__input ${error}`}
+              onChange={this.handleText}
+              name="description"
+              value={description.value}
+            />
+            <span className="form-component__input-error">
+              {description.error ? description.error : ""}
+            </span>
+          </p>
+          <p>
+            <span className="form-component__annot">
+              {date.value ? "Date" : ""}
+            </span>
+            <input
+              type="date"
+              placeholder="Date"
+              className={`form-component__input ${error}`}
+              onChange={this.handleDate}
+              name="date"
+              value={date.value}
+            />
+            <span className="form-component__input-error">
+              {date.error ? date.error : ""}
+            </span>
+          </p>
+          <p>
+            <span className="form-component__annot">
+              {time.value ? "Time" : ""}
+            </span>
+            <input
+              type="time"
+              placeholder="Time"
+              className={`form-component__input ${error}`}
+              onChange={this.handleTime}
+              name="time"
+              value={time.value}
+            />
+            <span className="form-component__input-error">
+              {time.error ? time.error : ""}
+            </span>
+          </p>
+          <p>
+            <span className="form-component__annot">
+              {capacity.value ? "Capacity" : ""}
+            </span>
+            <input
+              type="text"
+              placeholder="Capacity"
+              className={`form-component__input ${error}`}
+              onChange={this.handleCapacity}
+              name="capacity"
+              value={capacity.value}
+            />
+            <span className="form-component__input-error">
+              {capacity.error ? capacity.error : ""}
+            </span>
+          </p>
+
+          <button
+            className="form-component__submit"
+            type="submit"
+            onSubmit={this.handleSubmit}
+          >
+            Create new event
+          </button>
+        </form>
       </div>
     );
   }

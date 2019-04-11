@@ -1,26 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
 import "styles/login";
-import { getUserFromToken, postData, setUserToken } from "../Utils";
-import WithCurrentUser from "../containers/WithCurrentUser";
-import Form2 from "./Form2";
-import ErrorDisplay from "./ErrorDisplay";
+import "styles/form";
 
-class Login extends Component {
+import WithCurrentUser from "../containers/WithCurrentUser";
+import ErrorDisplay from "./ErrorDisplay";
+import { Link } from "react-router-dom";
+import FormClass from "./FormClass";
+import { postData } from "../Utils";
+
+class Login extends FormClass {
   state = {
     apiError: "",
-    serverError: ""
+    serverError: "",
+    email: { value: "", error: "" },
+    password: { value: "", error: "" },
+    fields: ["password", "email"]
   };
+
   componentDidMount() {
     const { history, currentUser } = this.props;
     if (currentUser.id) history.push("/events");
   }
-
-  finishAuth = response => {
-    const { setUser, history } = this.props;
-    setUserToken(response.headers.authorization);
-    setUser(getUserFromToken());
-    history.push("/events");
-  };
 
   handleAuthErr = ({ response }) => {
     console.log("failed", response);
@@ -35,32 +35,82 @@ class Login extends Component {
     this.setState({ serverError: true });
   };
 
-  clearErrors = () => this.setState({ apiError: "" });
-
-  handleSubmit = data => {
-    postData("auth/native", data)
-      .then(this.finishAuth)
-      .catch(this.handleAuthErr);
+  handleSubmit = e => {
+    e.preventDefault();
+    if (!this.checkForEmptyInputs()) {
+      const { password, email } = this.state;
+      const data = { password: password.value, email: email.value };
+      postData("auth/native", data)
+        .then(this.finishAuth)
+        .catch(this.handleAuthErr);
+    }
   };
+
   render() {
-    const { serverError } = this.state;
+    const { serverError, apiError, email, password } = this.state;
+    const error = apiError ? "error" : "";
     return (
       <div className="login__form-wrapper">
         {!serverError && (
-          <Form2
-            title="Sign in to Envatio."
-            byline="Enter your details below"
-            fields={["email", "password"]}
-            btnLabel="Sign in"
-            link={{
-              href: "/signup",
-              text: "Dont have an account?",
-              extra: "sign up"
-            }}
-            clearApiError={this.clearErrors}
-            apiError={this.state.apiError}
-            sendData={this.handleSubmit}
-          />
+          <form
+            noValidate
+            className={`form-component ${error}`}
+            onSubmit={this.handleSubmit}
+          >
+            <legend>Sign in to Eventio</legend>
+            {apiError ? (
+              <p className="form-component__apiError">{apiError}</p>
+            ) : (
+              <sub>Enter your details below</sub>
+            )}
+            <p>
+              <span className="form-component__annot">
+                {email.value ? "Email" : ""}
+              </span>
+              <input
+                type="email"
+                placeholder="Email"
+                className={`form-component__input ${error}`}
+                onChange={this.handleEmail}
+                name="email"
+                value={email.value}
+              />
+              <span className="form-component__input-error">
+                {email.error ? email.error : ""}
+              </span>
+            </p>
+            <p>
+              <span className="form-component__annot">
+                {password.value ? "Password" : ""}
+              </span>
+              <input
+                type="password"
+                placeholder="Password"
+                className={`form-component__input ${error}`}
+                onChange={this.handleText}
+                name="password"
+                value={password.value}
+              />
+              <span className="form-component__input-error">
+                {password.error ? password.error : ""}
+              </span>
+            </p>
+            <Link
+              className="form-component__bottomLink"
+              to={`/signup`}
+              escape="false"
+            >
+              {`Don't have an account ?`}
+              <em>sign up</em>
+            </Link>
+            <button
+              className="form-component__submit"
+              type="submit"
+              onSubmit={this.handleSubmit}
+            >
+              Sign in
+            </button>
+          </form>
         )}
         {serverError && <ErrorDisplay path="login" />}
       </div>
