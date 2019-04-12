@@ -6,12 +6,10 @@ import WithCurrentUser from "../containers/WithCurrentUser";
 import ErrorDisplay from "./ErrorDisplay";
 import { Link } from "react-router-dom";
 import FormClass from "./FormClass";
-import { postData } from "../Utils";
 
 class Login extends FormClass {
   state = {
     apiError: "",
-    serverError: "",
     email: { value: "", error: "" },
     password: { value: "", error: "" },
     fields: ["password", "email"]
@@ -22,35 +20,24 @@ class Login extends FormClass {
     if (currentUser.id) history.push("/events");
   }
 
-  handleAuthErr = ({ response }) => {
-    console.log("failed", response);
-
-    if (!response) return this.setState({ serverError: true });
-
-    const { error } = response.data;
-    if (error === "User.InvalidPassword")
-      return this.setState({
-        apiError: "Ooops! That username & password combination is not valid"
-      });
-    this.setState({ serverError: true });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
-    if (!this.checkForEmptyInputs()) {
+    if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
       const { password, email } = this.state;
       const data = { password: password.value, email: email.value };
-      postData("auth/native", data)
-        .then(this.finishAuth)
-        .catch(this.handleAuthErr);
+      const { setUser, history, clearErrors } = this.props;
+      clearErrors();
+      setUser(data, history);
     }
   };
 
   render() {
-    const { serverError, apiError, email, password } = this.state;
+    const { email, password } = this.state;
+    const { apiError, serverError } = this.props;
+    console.log(serverError);
     const error = apiError ? "error" : "";
     return (
-      <div className="login__form-wrapper">
+      <div>
         {!serverError && (
           <form
             noValidate
@@ -101,7 +88,7 @@ class Login extends FormClass {
               escape="false"
             >
               {`Don't have an account ?`}
-              <em>sign up</em>
+              <em> sign up</em>
             </Link>
             <button
               className="form-component__submit"
@@ -112,7 +99,7 @@ class Login extends FormClass {
             </button>
           </form>
         )}
-        {serverError && <ErrorDisplay path="login" />}
+        {serverError && <ErrorDisplay />}
       </div>
     );
   }

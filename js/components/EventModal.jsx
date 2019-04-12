@@ -1,5 +1,4 @@
 import React from "react";
-import { getUserToken, postData, tokenAvailable } from "../Utils";
 import ErrorDisplay from "./ErrorDisplay";
 import "styles/form";
 import FormClass from "./FormClass";
@@ -13,28 +12,30 @@ class EventModal extends FormClass {
     capacity: { value: "", error: "" },
     date: { value: "", error: "" },
     time: { value: "", error: "" },
-    startsAt: "",
-    fields: ["title", "description", "capacity", "date", "time"]
+    startsAt: ""
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (!this.checkForEmptyInputs() && tokenAvailable()) {
-      const { addEvent } = this.props;
-      if (tokenAvailable()) {
-        const token = getUserToken();
-        console.log(addEvent);
+    if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
+      const {
+        addEvent,
+        clearErrors,
+        tokenStillAvailable,
+        history
+      } = this.props;
+      if (tokenStillAvailable()) {
         const data = this.dataFromFields();
-        postData("events", data, token)
-          .then(addEvent)
-          .catch(this.handleApiError);
+        clearErrors();
+        addEvent(data);
+      } else {
+        history.push("/login");
       }
     }
   };
 
   dataFromFields = () => {
     const { title, description, capacity, startsAt, time } = this.state;
-    console.log(time);
     const t = time.value.split(":");
     startsAt.setHours(t[0]);
     startsAt.setMinutes(t[1]);
@@ -47,7 +48,6 @@ class EventModal extends FormClass {
   };
 
   handleApiError = ({ response }) => {
-    console.log(response);
     const fields = ["startsAt", "title", "description"];
     if (!response) return this.setState({ serverError: true });
 
@@ -64,15 +64,8 @@ class EventModal extends FormClass {
     });
   };
 
-  clearApiError = () => this.setState({ apiError: "" });
-
-  setupData({ time, capacity, date, title, description }) {
-    const startsAt = new Date(`${date} ${time}`).toISOString();
-    return { capacity, title, description, startsAt };
-  }
   render() {
     const {
-      apiError,
       serverError,
       title,
       description,
@@ -80,6 +73,7 @@ class EventModal extends FormClass {
       time,
       capacity
     } = this.state;
+    const { apiError } = this.props;
     const error = apiError ? "error" : "";
 
     if (serverError)

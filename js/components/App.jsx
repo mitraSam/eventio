@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { Route } from "react-router-dom";
 
 import store from "../store";
-import Landing from "./PageLayout";
 
 import AsyncRoute from "./AsyncRoute";
 
@@ -14,8 +13,17 @@ class App extends Component {
       <BrowserRouter>
         <Provider store={store}>
           <Switch>
-            <Route exact path="/" component={Landing()} />
-
+            <Route
+              exact
+              path="/"
+              component={props => (
+                <AsyncRoute
+                  props={props}
+                  path="layout"
+                  loadingComponent={import("./PageLayoutSignUp")}
+                />
+              )}
+            />
             <Route
               exact
               path="/events"
@@ -32,7 +40,6 @@ class App extends Component {
               exact
               path="/login"
               component={props => {
-                console.log(store);
                 return (
                   <AsyncRoute
                     props={props}

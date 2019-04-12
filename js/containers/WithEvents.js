@@ -1,23 +1,25 @@
-import { connect } from "react-redux";
-import {
-  setCurrentUser,
-  logUserOut,
-  clearErrors,
-  doAuthentication
-} from "../actions";
 import { tokenAvailable } from "../Utils";
+import {
+  clearErrors,
+  setCurrentUser,
+  loadEvents,
+  joinEvent,
+  leaveEvent,
+  addEvent
+} from "../actions";
+import connect from "react-redux/es/connect/connect";
 
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
-
+    events: state.events,
     apiError: state.apiError,
     serverError: state.serverError
   };
 };
 const mapDispatchToProps = dispatch => ({
-  setUser(data, history, param) {
-    dispatch(doAuthentication(data, history, param));
+  getEvents() {
+    dispatch(loadEvents());
   },
   tokenStillAvailable() {
     if (!tokenAvailable()) {
@@ -26,17 +28,24 @@ const mapDispatchToProps = dispatch => ({
     }
     return true;
   },
-  logout() {
-    dispatch(logUserOut());
+  joinEvt(param) {
+    dispatch(joinEvent(param));
   },
+  leaveEvt(param) {
+    dispatch(leaveEvent(param));
+  },
+  createEvt(data) {
+    dispatch(addEvent(data));
+  },
+
   clearErrors() {
     dispatch(clearErrors());
   }
 });
 
-const WithCurrentUser = connect(
+const WithEvents = connect(
   mapStateToProps,
   mapDispatchToProps
 );
 
-export default WithCurrentUser;
+export default WithEvents;

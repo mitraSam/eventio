@@ -17,6 +17,11 @@ export const submitData = (data, method) => {
     }
   });
 };
+export const apiErroMessages = {
+  ["User.InvalidPassword"]:
+    "Ooops! That username & password combination is not valid",
+  ["User.Exists"]: "Ooops! That email is already taken"
+};
 
 export const postData = (apiParam, data, Authorization = "") => {
   const key = process.env.API_KEY;

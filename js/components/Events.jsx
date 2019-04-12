@@ -3,12 +3,11 @@ import Header from "./Header";
 import "styles/events";
 import "styles/spinner";
 
-import { getData, getUserToken, postData, deleteData } from "../Utils";
 import EventCard from "./EventCard";
-import WithCurrentUser from "../containers/WithCurrentUser";
 import EventsHeader from "./EventsHeader";
 import EventModal from "./EventModal";
 import ErrorDisplay from "./ErrorDisplay";
+import WithEvents from "../containers/WithEvents";
 
 class Events extends Component {
   state = {
@@ -16,25 +15,21 @@ class Events extends Component {
     filters: ["all", "future", "past"],
     showDropdown: false,
     activeLayout: "column",
-    events: [],
     activeEvtModal: false,
-    serverError: false,
-    loadingEvts: true
+    serverError: false
   };
-  componentDidMount() {
-    const { tokenStillAvailable, history } = this.props;
-    if (!tokenStillAvailable()) history.push("/login");
-    getData("events")
-      .then(this.eventsFromData)
-      .catch(this.handleError);
+
+  componentDidUpdate(prevProps) {
+    const { events } = this.props;
+    if (events.length > prevProps.events.length) this.closeModal();
   }
 
-  handleError = () => this.setState({ serverError: true });
-
-  eventsFromData = ({ data }) => {
-    this.setState({ loadingEvts: false });
-    this.setState({ events: data });
-  };
+  componentDidMount() {
+    const { tokenStillAvailable, history } = this.props;
+    if (!tokenStillAvailable()) return history.push("/login");
+    const { getEvents } = this.props;
+    getEvents();
+  }
 
   modifyDropdown = () => {
     const { showDropdown } = this.state;
@@ -95,33 +90,17 @@ class Events extends Component {
     const id = target.dataset["id"];
     const action = target.dataset["action"];
     const apiParam = `events/${id}/attendees/me`;
-    const { tokenStillAvailable, history } = this.props;
+    const { tokenStillAvailable, history, joinEvt, leaveEvt } = this.props;
     if (tokenStillAvailable()) {
-      const token = getUserToken();
-      action === "join"
-        ? postData(apiParam, {}, token)
-            .then(this.updateEvents)
-            .catch(console.log)
-        : deleteData(apiParam, token)
-            .then(this.updateEvents)
-            .catch(res => console.log(JSON.stringify(res)));
+      action === "join" ? joinEvt(apiParam) : leaveEvt(apiParam);
     } else history.push("/login");
   };
 
-  updateEvents = ({ data }) => {
-    const { events } = this.state;
-    const evtIndex = events.findIndex(evt => evt.id === data.id);
-    events.splice(evtIndex, 1, data);
-    this.setState({ events });
-  };
-  addEvent = ({ data }) => {
-    const { events } = this.state;
-    this.setState({ events: [data, ...events] });
-    this.closeModal();
-  };
   closeModal = () => {
     this.setState({ activeEvtModal: false });
   };
+
+  addEvent = () => this.props.createEvt();
 
   edit = () => console.log("to be implemented");
   render() {
@@ -130,12 +109,10 @@ class Events extends Component {
       filters,
       showDropdown,
       activeLayout,
-      events,
       activeEvtModal,
-      loadingEvts,
       serverError
     } = this.state;
-    const { history } = this.props;
+    const { history, events } = this.props;
     const open = showDropdown ? "open" : "";
     const activeEvt = activeEvtModal ? "evt-modal" : "";
 
@@ -159,7 +136,7 @@ class Events extends Component {
               changeLayout={this.changeLayout}
               modifyDropdown={this.modifyDropdown}
             />
-            {!loadingEvts && (
+            {events && (
               <div className="events__container">
                 {events
                   .filter(evt => this.applyFilter(evt.startsAt))
@@ -183,7 +160,7 @@ class Events extends Component {
                   ))}
               </div>
             )}
-            {loadingEvts && (
+            {!events.length && (
               <div className="spinner-wrap">
                 <div className="spinner">
                   <i />
@@ -207,11 +184,19 @@ class Events extends Component {
           </main>
         )}
         {activeEvtModal && (
-          <EventModal closeModal={this.closeModal} addEvent={this.addEvent} />
+          <EventModal
+            closeModal={this.closeModal}
+            apiError={this.props.apiError}
+            history={history}
+            tokenStillAvailable={this.props.tokenStillAvailable}
+            createEvt={this.props.createEvt}
+            clearErrors={this.props.clearErrors}
+            addEvent={this.props.createEvt}
+          />
         )}
       </div>
     );
   }
 }
 
-export default WithCurrentUser(Events);
+export default WithEvents(Events);

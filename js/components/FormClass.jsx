@@ -9,9 +9,8 @@ class FormClass extends Component {
   };
 
   handleText = ({ target }) => {
-    const value = target.value;
-    const name = target.name;
-    if (!value) return this.setEmptyField(name);
+    const { value, name, placeholder } = target;
+    if (!value) return this.setEmptyField(name, placeholder);
     this.setField(name, target.value, "");
   };
 
@@ -20,9 +19,9 @@ class FormClass extends Component {
   }
 
   handleDate = ({ target }) => {
-    const value = target.value;
+    const { value } = target;
     const startsAt = target.valueAsDate;
-    if (!value) return this.setEmptyField("date");
+    if (!value) return this.setEmptyField("date", "Date");
     if (this.isDateFuture(startsAt)) {
       this.setState({ startsAt }, () => this.isTimePast());
       return this.setField("date", target.value, "");
@@ -54,18 +53,18 @@ class FormClass extends Component {
   };
 
   handleCapacity = ({ target }) => {
-    const { value } = target;
-    if (!value) return this.setEmptyField("capacity");
+    const { value, placeholder } = target;
+    if (!value) return this.setEmptyField("capacity", placeholder);
     if (Number(value) && Number(value) > 0)
       return this.setField("capacity", target.value, "");
     this.setField("capacity", target.value, "Capacity has to be a positive nr");
   };
 
   handleTime = ({ target }) => {
-    const value = target.value;
+    const { value, placeholder } = target;
     const { startsAt } = this.state;
 
-    if (!value) return this.setEmptyField(name);
+    if (!value) return this.setEmptyField(name, placeholder);
     if (startsAt) {
       if (this.isTimePast(target.value)) return;
     }
@@ -73,27 +72,49 @@ class FormClass extends Component {
   };
 
   handleEmail = ({ target }) => {
-    if (!target.value) return this.setEmptyField("email");
+    if (!target.value) return this.setEmptyField("email", "Email");
     if (validateEmail(target.value))
       return this.setField("email", target.value, "");
     this.setField("email", target.value, "Email pattern [a-z](\\w*)+@strv.com");
   };
 
-  checkForEmptyInputs() {
-    const { fields } = this.state;
-    let emptyInputs = false;
-    fields.forEach(field => {
-      if (!this.state[field].value) {
-        this.setEmptyField(field);
-        emptyInputs = true;
-      }
-    });
+  checkForEmptyInputs(inputs) {
+    let emptyInputs = true;
+    inputs.forEach(input =>
+      input.value
+        ? (emptyInputs = false)
+        : this.setEmptyField(input.name, input.placeholder)
+    );
     return emptyInputs;
   }
 
-  setEmptyField = field =>
+  handleRepeatPassword = ({ target }) => {
+    const { password } = this.state;
+    const { value } = target;
+    if (!value) return this.setEmptyField("repeatPassword", "Repeat password");
+    if (password.value === value)
+      return this.setField("repeatPassword", value, "");
+    this.setField("repeatPassword", value, "Passwords do not match");
+  };
+
+  handlePassword = ({ target }) => {
+    const { value } = target;
+    const { password, repeatPassword } = this.state;
+    if (!value) return this.setEmptyField("password", "Password");
+    if (repeatPassword.value) {
+      if (repeatPassword.value !== password)
+        this.setField(
+          "repeatPassword",
+          repeatPassword.value,
+          "Passwords do not match"
+        );
+    }
+    this.setField("password", target.value, "");
+  };
+
+  setEmptyField = (field, placeholder) =>
     this.setState({
-      [field]: { value: "", error: `${field} cannot be empty` }
+      [field]: { value: "", error: `${placeholder} cannot be empty` }
     });
   setField = (field, value, error) =>
     this.setState({ [field]: { value, error } });
