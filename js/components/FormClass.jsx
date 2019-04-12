@@ -1,5 +1,10 @@
 import { Component } from "react";
-import { getUserFromToken, setUserToken, validateEmail } from "../Utils";
+import {
+  getUserFromToken,
+  setUserToken,
+  validateEmail,
+  isDateFuture
+} from "../Utils";
 class FormClass extends Component {
   finishAuth = response => {
     const { setUser, history } = this.props;
@@ -14,15 +19,11 @@ class FormClass extends Component {
     this.setField(name, target.value, "");
   };
 
-  isDateFuture(date) {
-    return date.getTime() > new Date().getTime();
-  }
-
   handleDate = ({ target }) => {
     const { value } = target;
     const startsAt = target.valueAsDate;
     if (!value) return this.setEmptyField("date", "Date");
-    if (this.isDateFuture(startsAt)) {
+    if (isDateFuture(startsAt)) {
       this.setState({ startsAt }, () => this.isTimePast());
       return this.setField("date", target.value, "");
     }
@@ -41,7 +42,7 @@ class FormClass extends Component {
       const t = minSec.split(":");
       startsAt.setHours(t[0]);
       startsAt.setMinutes(t[1]);
-      if (!this.isDateFuture(startsAt)) {
+      if (!isDateFuture(startsAt)) {
         this.setField(
           "time",
           minSec.value,

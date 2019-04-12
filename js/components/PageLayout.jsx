@@ -4,13 +4,17 @@ import "styles/pagelayout";
 
 import Header from "./Header";
 
-const Landing = (ChildComponent, onLogin) =>
+const Landing = (ChildComponent, onLogin, onSignUp) =>
   class Wrapper extends Component {
     render() {
       const bannerText = "“Great,kid. Don't get cocky.”";
       return (
         <div className="landing wrapper">
-          <Header history={this.props.history} hideLink={onLogin} />
+          <Header
+            history={this.props.history}
+            onSignUp={onSignUp}
+            hideLink={onLogin}
+          />
           <main>
             <section className="landing__banner">
               <blockquote>

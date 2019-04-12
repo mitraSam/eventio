@@ -59,6 +59,10 @@ export const getData = apiParam => {
   });
 };
 
+export const isDateFuture = date => {
+  return date.getTime() > new Date().getTime();
+};
+
 export const getUserToken = () => localStorage.getItem("userToken");
 export const getUserFromToken = () => jwt.decode(getUserToken()).user;
 export const getExpFromToken = () => jwt.decode(getUserToken()).exp;

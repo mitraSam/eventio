@@ -21,26 +21,44 @@ class Header extends Component {
   };
 
   render() {
-    const { currentUser, hideLink } = this.props;
+    const { currentUser, hideLink, onSignUp } = this.props;
     const { showDropdown } = this.state;
     const hide = hideLink ? "hideLink" : "";
     const hideDropdown = showDropdown ? "" : "hide";
-    let nav = (
-      <nav className="mainHeader__nav">
-        <Link className="mainHeader__logo" to={"/"} rel="home">
-          E.
-        </Link>
+    let nav;
+    if (onSignUp) {
+      nav = (
+        <nav className="mainHeader__nav">
+          <Link className="mainHeader__logo" to={"/"} rel="home">
+            E.
+          </Link>
 
-        <ul className={`${hide} mainHeader__nav__link-container`}>
-          <li className="mainHeader__nav--link">
-            <Link to={"/login"}>
-              Dont have an account?<span> Sign up</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    );
+          <ul className={`${hide} mainHeader__nav__link-container`}>
+            <li className="mainHeader__nav--link">
+              <Link to={"/login"}>
+                Dont have an account?<span> Sign up</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      );
+    } else {
+      nav = (
+        <nav className="mainHeader__nav">
+          <Link className="mainHeader__logo" to={"/"} rel="home">
+            E.
+          </Link>
 
+          <ul className={`${hide} mainHeader__nav__link-container`}>
+            <li className="mainHeader__nav--link">
+              <Link to={"/login"}>
+                Dont have an account?<span> Sign up</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      );
+    }
     if (currentUser.id) {
       const { firstName, lastName } = currentUser;
       const firsInitial = firstName.charAt(0);

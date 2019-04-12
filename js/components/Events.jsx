@@ -8,6 +8,7 @@ import EventsHeader from "./EventsHeader";
 import EventModal from "./EventModal";
 import ErrorDisplay from "./ErrorDisplay";
 import WithEvents from "../containers/WithEvents";
+import { isDateFuture } from "../Utils";
 
 class Events extends Component {
   state = {
@@ -74,8 +75,11 @@ class Events extends Component {
     );
     return formatedDate.replace(/,([^,]*)$/, " - $1");
   }
-  setEvtBtn(id, attendees) {
+  setEvtBtn(id, attendees, start) {
     const { currentUser } = this.props;
+    if (!isDateFuture(new Date(start))) {
+      return { type: "expired", method: "" };
+    }
     const type =
       currentUser.id === id
         ? "edit"
@@ -153,7 +157,11 @@ class Events extends Component {
                       capacity={evt.capacity}
                       date={this.parseDate(evt.startsAt)}
                       author={`${evt.owner.firstName} ${evt.owner.lastName}`}
-                      button={this.setEvtBtn(evt.owner.id, evt.attendees)}
+                      button={this.setEvtBtn(
+                        evt.owner.id,
+                        evt.attendees,
+                        evt.startsAt
+                      )}
                       layout={activeLayout}
                       id={evt.id}
                     />
