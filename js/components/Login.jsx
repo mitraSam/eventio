@@ -1,5 +1,4 @@
 import React from "react";
-import "styles/login";
 import "styles/form";
 
 import WithCurrentUser from "../containers/WithCurrentUser";

@@ -1,7 +1,7 @@
 import React from "react";
-
+import "styles/form";
 const SignUpPlaceholder = () => (
-  <div className="landing wrapper">
+  <div className="placeholder landing wrapper">
     <header className="mainHeader">
       <nav className="mainHeader__nav">
         <a className="mainHeader__logo" rel="home" href="/">
