@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import EventsPlaceholder from "./EventsPlaceholder";
 import WithCurrentUser from "../containers/WithCurrentUser";
+import SignUpPlaceholder from "./SignUpPlaceholder";
 
 class AsyncRoute extends Component {
   state = {
@@ -21,6 +22,7 @@ class AsyncRoute extends Component {
   setPlaceholder() {
     const { path } = this.props;
     if (path === "events") return <EventsPlaceholder />;
+    if (path === "/") return <SignUpPlaceholder />;
     return "";
   }
 
