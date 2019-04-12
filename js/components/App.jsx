@@ -20,6 +20,7 @@ class App extends Component {
                 <AsyncRoute
                   props={props}
                   path="/"
+                  noUser={true}
                   loadingComponent={import("./PageLayoutSignUp")}
                 />
               )}
@@ -43,6 +44,7 @@ class App extends Component {
                 return (
                   <AsyncRoute
                     props={props}
+                    noUser={true}
                     loadingComponent={import("./PageLayoutLogin")}
                   />
                 );

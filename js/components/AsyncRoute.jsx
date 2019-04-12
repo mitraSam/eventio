@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import EventsPlaceholder from "./EventsPlaceholder";
 import WithCurrentUser from "../containers/WithCurrentUser";
 import SignUpPlaceholder from "./SignUpPlaceholder";
+import { Redirect } from "react-router";
 
 class AsyncRoute extends Component {
   state = {
@@ -27,12 +28,14 @@ class AsyncRoute extends Component {
   }
 
   render() {
-    const { history } = this.props.props;
-    const { protect, currentUser } = this.props;
+    const { protect, currentUser, noUser } = this.props;
     if (protect && !currentUser.id) {
-      history.push("/login");
-      return null;
+      return <Redirect to={"/login"} />;
     }
+    if (noUser && currentUser.id) {
+      return <Redirect to={"/events"} />;
+    }
+
     const { loaded } = this.state;
     const { props } = this.props;
 
