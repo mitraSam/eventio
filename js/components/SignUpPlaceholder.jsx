@@ -1,7 +1,9 @@
 import React from "react";
 import "styles/form";
+import "styles/header";
+import "styles/pagelayout";
 const SignUpPlaceholder = () => (
-  <div className="placeholder landing wrapper">
+  <div className="landing wrapper placeholder">
     <header className="mainHeader">
       <nav className="mainHeader__nav">
         <a className="mainHeader__logo" rel="home" href="/">
@@ -28,54 +30,50 @@ const SignUpPlaceholder = () => (
       </section>
       <section className="landing__content">
         <div className="login__form-wrapper">
-          <form noValidate="" className="form-component error">
+          <form noValidate="" className="form-component ">
             <legend>Get started absolutely free</legend>
-            <p className="form-component__apiError">Validation</p>
+            <sub>Enter your details below</sub>
             <p>
               <span className="form-component__annot" />
               <input
                 type="text"
                 placeholder="First name"
-                className="form-component__input error"
+                className="form-component__input "
                 name="firstName"
                 value=""
               />
-              <span className="form-component__input-error">
-                First name cannot be empty
-              </span>
+              <span className="form-component__input-error" />
             </p>
             <p>
               <span className="form-component__annot" />
               <input
                 type="text"
                 placeholder="Last name"
-                className="form-component__input error"
+                className="form-component__input "
                 name="lastName"
                 value=""
-              />
-              <span className="form-component__input-error">
-                Last name cannot be empty
-              </span>
-            </p>
-            <p>
-              <span className="form-component__annot">Email</span>
-              <input
-                type="email"
-                placeholder="Email"
-                className="form-component__input error"
-                name="email"
-                value="brucebanner@strv.com"
               />
               <span className="form-component__input-error" />
             </p>
             <p>
-              <span className="form-component__annot">Password</span>
+              <span className="form-component__annot" />
+              <input
+                type="email"
+                placeholder="Email"
+                className="form-component__input "
+                name="email"
+                value=""
+              />
+              <span className="form-component__input-error" />
+            </p>
+            <p>
+              <span className="form-component__annot" />
               <input
                 type="password"
                 placeholder="Password"
-                className="form-component__input error"
+                className="form-component__input "
                 name="password"
-                value="kill3r"
+                value=""
               />
               <span className="form-component__input-error" />
             </p>
@@ -84,13 +82,11 @@ const SignUpPlaceholder = () => (
               <input
                 type="password"
                 placeholder="Repeat password"
-                className="form-component__input error"
+                className="form-component__input "
                 name="repeatPassword"
                 value=""
               />
-              <span className="form-component__input-error">
-                Repeat password cannot be empty
-              </span>
+              <span className="form-component__input-error" />
             </p>
             <a
               className="form-component__bottomLink"
