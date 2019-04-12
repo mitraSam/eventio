@@ -47,23 +47,6 @@ class EventModal extends FormClass {
     };
   };
 
-  handleApiError = ({ response }) => {
-    const fields = ["startsAt", "title", "description"];
-    if (!response) return this.setState({ serverError: true });
-
-    const { errors } = response.data;
-    if (Array.isArray(errors))
-      return this.setState({
-        apiError: errors[0].message
-      });
-    fields.forEach(field => {
-      if (field in errors)
-        return this.setState({
-          apiError: errors[field].message
-        });
-    });
-  };
-
   render() {
     const {
       serverError,

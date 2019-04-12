@@ -95,10 +95,23 @@ export const addEvent = data => dispatch => {
     .then(({ data }) => {
       dispatch(addEventToEvents(data));
     })
-    .catch(handleError);
+    .catch(handleAddEventError(dispatch));
 };
 
 export const logUserOut = () => dispatch => {
   removeUserToken();
   dispatch(setCurrentUser({}));
+};
+
+export const handleAddEventError = dispatch => err => {
+  const { response } = err;
+  const fields = ["startsAt", "title", "description"];
+  if (!response) return dispatch(setServerError(true));
+  console.log(JSON.stringify(err));
+  const { errors } = response.data;
+  if (Array.isArray(errors)) return dispatch(setApiError(errors[0].message));
+
+  fields.forEach(field => {
+    if (field in errors) return dispatch(setApiError(errors[field].message));
+  });
 };
