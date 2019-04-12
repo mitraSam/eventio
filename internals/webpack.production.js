@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const cssnano = require("cssnano");
+const autoprefixer = require("autoprefixer");
+const webpack = require("webpack");
 
 const MiniCssPlugin = new MiniCssExtractPlugin({
   filename: "styles.css"
@@ -25,9 +27,22 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader"
+        ]
       }
     ]
   },
-  plugins: [MiniCssPlugin, OptimizeCSSPlugin]
+  plugins: [
+    MiniCssPlugin,
+    OptimizeCSSPlugin,
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()]
+      }
+    })
+  ]
 };
