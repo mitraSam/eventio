@@ -4,6 +4,8 @@ const cssnano = require("cssnano");
 const autoprefixer = require("autoprefixer");
 const webpack = require("webpack");
 
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+
 const MiniCssPlugin = new MiniCssExtractPlugin({
   filename: "styles.css"
 });
@@ -23,6 +25,8 @@ const OptimizeCSSPlugin = new OptimizeCSSAssetsPlugin({
 
 module.exports = {
   entry: "./js/components/ClientApp.jsx",
+  mode: "production",
+
   module: {
     rules: [
       {
@@ -34,6 +38,18 @@ module.exports = {
           "sass-loader"
         ]
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            inline: false
+          }
+        }
+      })
     ]
   },
   plugins: [
