@@ -49,11 +49,12 @@
             &__content{
             display: flex;
             width: 65vw;
-            padding-left: 20vw;
+                padding-left: 0;
             align-content: center;
             align-items: center;
                 text-align: left;
                 font-size: 1em;
+                position: relative;
         }
         &__banner{
             display: flex;
@@ -64,7 +65,8 @@
             flex: 1;
             color:#fff;
             padding: 4.5vw;
-            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/trooper.jpg');
+            background-image: url('../images/trooper-banner.png');
+            background-color: shade($dark-grey,10%);
             background-position: center center;
             background-size: 100%;
             background-repeat: no-repeat;
@@ -91,6 +93,7 @@
 
         .form-component{
             width: 30em;
+            margin-left: 18vw;
             legend{
                 text-align: left;
             }

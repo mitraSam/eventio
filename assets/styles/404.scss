@@ -1,18 +1,35 @@
 @import "main";
 .on404,.error-display{
   margin-top:4em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   h1{
-    font-size: 1.6em;
+    font-size: 1.75em;
     margin-bottom: 1em;
   }
   p{
-    color: $light-grey;
-    line-height: 1.2;
+    color: $cool-grey;
+    line-height: 1.33;
+  }
+  button{
+    @extend %submit-button;
+    background: #323c46;
+    margin-top: 2em;
   }
 }
 
 @media screen and (min-width: $large-vw) {
 .on404,.error-display{
   text-align: left;
+  margin-top:0;
+  padding-left: 14em;
+  background: url("../images/trooper.svg");
+  background-repeat:no-repeat;
+  background-position: -140px center;
+
+  height: 27em;
+
 }
 }

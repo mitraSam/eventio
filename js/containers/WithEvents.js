@@ -1,12 +1,12 @@
 import { tokenAvailable } from "../Utils";
 import {
   clearErrors,
-  setCurrentUser,
   loadEvents,
   joinEvent,
   leaveEvent,
   addEvent
 } from "../actions";
+import { setCurrentUser } from "../actions/actionCreators";
 import connect from "react-redux/es/connect/connect";
 
 const mapStateToProps = state => {

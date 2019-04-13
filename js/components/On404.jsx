@@ -9,7 +9,7 @@ const On404 = () => (
     <p>Seems like you strayed away from the path of truth.</p>
     <p>Please press the button below and everything should be fine again.</p>
     <Link to="/">
-      <button className="landing__refresh">go to home page</button>
+      <button>go to home page</button>
     </Link>
   </div>
 );

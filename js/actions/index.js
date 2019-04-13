@@ -1,40 +1,21 @@
 import {
-  SET_CURRENT_USER,
-  SET_API_ERROR,
-  SET_SERVER_ERROR,
-  SET_EVENTS,
-  UPDATE_EVENT_IN_EVENTS,
-  ADD_EVENT_TO_EVENTS
-} from "../Constants";
+  setServerError,
+  setApiError,
+  setCurrentUser,
+  setEvents,
+  updateEventInEvents,
+  addEventToEvents
+} from "./actionCreators";
 import {
-  getUserFromToken,
   postData,
-  removeUserToken,
   setUserToken,
+  getUserFromToken,
   apiErroMessages,
   getData,
   getUserToken,
-  deleteData
+  deleteData,
+  removeUserToken
 } from "../Utils";
-
-export function setCurrentUser(userObj) {
-  return { type: SET_CURRENT_USER, payload: userObj };
-}
-export function setServerError(error) {
-  return { type: SET_SERVER_ERROR, payload: error };
-}
-export function setApiError(error) {
-  return { type: SET_API_ERROR, payload: error };
-}
-export function setEvents(data) {
-  return { type: SET_EVENTS, payload: data };
-}
-export function updateEventInEvents(updatedEvent) {
-  return { type: UPDATE_EVENT_IN_EVENTS, payload: updatedEvent };
-}
-export function addEventToEvents(event) {
-  return { type: ADD_EVENT_TO_EVENTS, payload: event };
-}
 
 export const clearErrors = () => dispatch => {
   dispatch(setServerError(false));

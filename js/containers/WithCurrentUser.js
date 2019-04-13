@@ -1,10 +1,6 @@
 import { connect } from "react-redux";
-import {
-  setCurrentUser,
-  logUserOut,
-  clearErrors,
-  doAuthentication
-} from "../actions";
+import { logUserOut, clearErrors, doAuthentication } from "../actions";
+import { setCurrentUser } from "../actions/actionCreators";
 import { tokenAvailable } from "../Utils";
 
 const mapStateToProps = state => {

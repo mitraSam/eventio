@@ -8,7 +8,7 @@ import {
   getUserToken,
   removeUserToken
 } from "../Utils";
-import { setCurrentUser } from "../actions";
+import { setCurrentUser } from "../actions/actionCreators";
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 

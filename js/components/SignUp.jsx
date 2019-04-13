@@ -128,7 +128,7 @@ class SignUp extends FormClass {
             </p>
             <p>
               <span className="form-component__annot">
-                {repeatPassword.value ? "Password" : ""}
+                {repeatPassword.value ? "Repeat password" : ""}
               </span>
               <input
                 type="password"

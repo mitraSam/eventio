@@ -106,15 +106,17 @@ class FormClass extends Component {
 
   handlePassword = ({ target }) => {
     const { value } = target;
-    const { password, repeatPassword } = this.state;
+    const { repeatPassword } = this.state;
+
     if (!value) return this.setEmptyField("password", "Password");
     if (repeatPassword.value) {
-      if (repeatPassword.value !== password)
+      if (repeatPassword.value !== value)
         this.setField(
           "repeatPassword",
           repeatPassword.value,
           "Passwords do not match"
         );
+      else this.setField("repeatPassword", repeatPassword.value, "");
     }
     this.setField("password", target.value, "");
   };
