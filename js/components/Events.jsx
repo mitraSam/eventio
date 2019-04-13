@@ -90,7 +90,7 @@ class Events extends Component {
     this.setState({ activeEvtModal: false });
   };
 
-  edit = () => console.log("to be implemented");
+  edit = () => null;
   render() {
     const {
       selectedFilter,
