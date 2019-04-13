@@ -80,14 +80,20 @@ class FormClass extends Component {
   };
 
   checkForEmptyInputs(inputs) {
-    let emptyInputs = true;
-    inputs.forEach(input =>
-      input.value
-        ? (emptyInputs = false)
-        : this.setEmptyField(input.name, input.placeholder)
-    );
+    inputs.pop();
+    let emptyInputs = false;
+    inputs.forEach(input => {
+      const error = this.checkError(this.state[input.name]);
+      if (error) emptyInputs = true;
+      if (!input.value) {
+        this.setEmptyField(input.name, input.placeholder);
+        emptyInputs = true;
+      }
+    });
     return emptyInputs;
   }
+
+  checkError = val => !!val.error;
 
   handleRepeatPassword = ({ target }) => {
     const { password } = this.state;

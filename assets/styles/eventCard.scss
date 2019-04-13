@@ -1,0 +1,182 @@
+@import "main";
+
+.events{
+  &__card{
+    padding: 2em;
+    margin: 1em auto;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.16), 0 0 0 rgba(0,0,0,0.23);
+    display: flex;
+    flex-direction: column;
+    min-height: 47vh;
+    justify-content: space-between;
+    time{
+      color:$silver-seven;
+      font-size: .88em;
+      display: block;
+    }
+    h2{
+      font-size: 1.38em;
+      margin-bottom: .3em;
+    }
+    div{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__author{
+      color: $warm-grey;
+      font-size: .88em;
+      display: block;
+    }
+    &__author.hideOnMobile{
+      display: none;
+    }
+    &__description{
+      line-height: 1.5;
+      color:$cool-grey;
+    }
+    &__attendees{
+      color: $cool-grey;
+      font-size: .88em;
+      background:url("../images/card-user-icon.svg");
+      background-repeat: no-repeat;
+      background-position: left .75em;
+      display:flex;
+      align-items: flex-end;
+      padding-left: 1.5em;
+      background-size: 1.1em;
+      height: 2em;
+    }
+
+    &__btn-join{
+    @extend %event-button--join;
+    }
+    &__btn-leave{
+      @extend %event-button--leave;
+    } &__btn-edit{
+      @extend %event-button--edit;
+    }
+    &__btn-expired{
+      @extend %event-button--expired
+    }
+  }
+
+  &__card.row {
+    min-height: initial;
+    padding: 1.5em;
+    header {
+      order: 1
+    }
+    h2{
+      font-size: 1.12em;
+    }
+    button{
+      position: absolute;
+      right: 0;
+      top:-1.2em;
+    }
+    time {
+      margin: 1.5em 0 .4em;
+      order: 3;
+    }
+
+    .events__card__description {
+      order: 2;
+      line-height: 1.4;
+    }
+    .events__card__attendees{
+      background: none;
+      padding-left: 0;
+      margin-top:.3em;
+      align-items: initial;
+    }
+
+    .events__card__details {
+      order: 4;
+      position: relative;
+    }
+
+    .events__card__author {
+      display: none;
+    }
+  }
+}
+
+
+@media screen and (min-width: $small-vw) {
+  .events {
+    &__card{
+      margin: .4em 0;
+      width: 47vw;
+    }
+
+  }
+}
+
+@media screen and (min-width: $medium-vw) {
+  .events {
+    &__card{
+      width: 29em;
+    }
+  }
+}
+
+@media screen and (min-width: $large-vw) {
+  .events{
+
+    &__card.column:nth-child(3n+3) {
+      margin-right: 0;
+    }
+
+    &__card.column:nth-child(3n+1) {
+      margin-left:0;
+    }
+    &__card{
+      width: 25.6vw;
+      margin: .3vw;
+      min-height: 33vh;
+    }
+
+
+    &__card.row{
+      width: 78vw;
+      padding: 1.5em;
+      margin:.3vw 0;
+      flex-direction: row;
+      align-items: center;
+      header{
+        flex:2
+      }
+      .events__card__description{
+        flex: 2;
+      }
+      time{
+        margin: 0;
+        order: 4;
+        flex: 1.4;
+      }
+      button{
+        position: initial;
+      }
+      .events__card__author.hideOnMobile{
+        display: inline-block;
+        order: 3;
+        flex: 1;
+      }
+      .events__card__details{
+        flex:2;
+      }
+      .events__card__attendees{
+        background: none;
+        align-items: center;
+        margin-top: 0;
+      }
+
+    }
+  }
+
+}
+
+
+

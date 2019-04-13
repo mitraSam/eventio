@@ -31,7 +31,7 @@
     display: block;
     color: var(--dark-grey);
     margin: 0 0 .5em;
-    font-size: 1.1em;
+    font-size: 1.12em;
     border: none;
     border-bottom: 1px solid $silver-three;
     padding-bottom: .2em;
@@ -52,9 +52,15 @@
       height: auto;
     }
 
+    &[type="password"]::placeholder{
+      font-size: 1.1rem;
+    }
     &::placeholder{
       color:$silver-three;
+      font-size: 1em;
+      /*
       font-size: 1rem;
+      */
       letter-spacing: initial;
     }
     &::placeholder::first-letter{
@@ -67,8 +73,8 @@
   }
   &__apiError{
     color:$red-pink;
-    font-size:.8em;
-    line-height: 1.6;
+    font-size:1.12em;
+    line-height: 1.2;
     margin-bottom: 3em;
     text-align: center;
   }
@@ -88,6 +94,7 @@
   @extend %submit-button;
     margin: 2.5em auto;
 
+
   }
   &__annot {
     text-align: left;
@@ -101,7 +108,7 @@
   }
   &__input-error{
     color: $red-pink;
-    font-size: .9em;
+    font-size: 1.12em;
     min-height: 1em;
     margin-bottom: .7em;
     text-align: left;

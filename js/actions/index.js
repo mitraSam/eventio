@@ -53,7 +53,6 @@ export const doAuthentication = (data, history, type) => dispatch => {
 };
 
 const handleError = dispatch => err => {
-  console.log(JSON.stringify(err));
   const { response } = err;
   if (!response) {
     dispatch(setServerError(true));
@@ -107,7 +106,6 @@ export const handleAddEventError = dispatch => err => {
   const { response } = err;
   const fields = ["startsAt", "title", "description"];
   if (!response) return dispatch(setServerError(true));
-  console.log(JSON.stringify(err));
   const { errors } = response.data;
   if (Array.isArray(errors)) return dispatch(setApiError(errors[0].message));
 

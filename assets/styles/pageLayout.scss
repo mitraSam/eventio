@@ -90,7 +90,7 @@
         }
 
         .form-component{
-            width: 25em;
+            width: 30em;
             legend{
                 text-align: left;
             }
@@ -111,6 +111,12 @@
             }
             &__input{
                 font-size: 1.124em;
+            }
+            &__input[type="password"]{
+                font-size: .7em;
+            }
+            &__input[type="password"]::placeholder{
+                font-size: 1.4em;
             }
             &__annot{
                 font-size: .88em;

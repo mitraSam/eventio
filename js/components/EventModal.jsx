@@ -88,7 +88,7 @@ class EventModal extends FormClass {
             </span>
             <input
               type="text"
-              placeholder="title"
+              placeholder="Title"
               className={`form-component__input ${error}`}
               onChange={this.handleText}
               name="title"

@@ -1,5 +1,5 @@
 import React from "react";
-
+import "styles/eventsHeader";
 const EventsHeader = ({
   selectedFilter,
   filters,
@@ -11,9 +11,9 @@ const EventsHeader = ({
 }) => (
   <header className="events__header">
     <ul className="events__filter-menu-m">
-      <li className="events__filter-menu-m--title">
+      <li className="events__filter-menu-m__title">
         <button
-          className="events__filter-menu-m--title-btn"
+          className="events__filter-menu-m__title-btn"
           onClick={modifyDropdown}
         >
           <span>show: </span>
@@ -21,7 +21,7 @@ const EventsHeader = ({
         </button>
       </li>
       <li>
-        <ul className={`events__filter-menu-m--drop ${open}`}>
+        <ul className={`events__filter-menu-m__drop ${open}`}>
           {filters
             .filter(filter => filter !== selectedFilter)
             .map(filter => (
@@ -54,7 +54,7 @@ const EventsHeader = ({
         <button
           data-style="column"
           onClick={changeLayout}
-          className="events__layout-menu--btn column"
+          className="events__layout-menu__btn column"
         >
           <svg
             data-style="column"
@@ -76,7 +76,7 @@ const EventsHeader = ({
         <button
           data-style="row"
           onClick={changeLayout}
-          className="events__layout-menu--btn row"
+          className="events__layout-menu__btn row"
         >
           <svg
             data-style="row"

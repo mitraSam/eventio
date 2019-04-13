@@ -109,11 +109,21 @@
   color: #323c46;
 }
 
+
+
+$warm-grey: #7d7878;
+$silver-four: #c4c9d1;
+$darkish-pink: #e73370;
+$warm-pink: #ff4081;
+$dark-mint-green-two: #20bd78;
+$silver-seven: #cacdd0;
+$pale-grey-two: #f9f9fb;
 $red-pink: #fc226e;
 $cool-grey-two: #9ca5af;
 $silver: #d9dce1;
 $pale-grey-two: #f9f9fb;
 $cool-grey: #949ea8;
+$cool-grey-three: #a9aeb4;
 $silver-three:#c9ced3;
 $lighter-grey:rgb(213,217,221);
 $error-pink:rgb(255,76,137);
@@ -152,16 +162,6 @@ a{
 .form__component input::placeholder{
     text-transform:capitalize;
 }
-.form__component label{
-        border: 0;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-}
 
 %submit-button{
   width: 15em;
@@ -172,8 +172,50 @@ a{
   padding: 1em;
   border-radius: 4px;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
+
+%event-button{
+  width: 7.2em;
+  border-radius: 4px;
+  font-size: .88em;
+  letter-spacing: 1px;
+  font-weight: 600;
+  padding: .4em;
+  text-transform: uppercase;
+}
+
+%event-button--join{
+  @extend %event-button;
+  background-color:$greenblue;
+  color:white;
+  &:active,&:focus{
+    background: $dark-mint-green-two;
+  }
+}
+%event-button--leave{
+  @extend %event-button;
+  background-color:$warm-pink;
+  color:white;
+  &:active,&:focus{
+    background: $dark-mint-green-two;
+  }
+}
+%event-button--edit{
+  @extend %event-button;
+  background-color:$silver-four;
+  color: $cool-grey-three;
+  &:active,&:focus{
+    background: $silver-four;
+  }
+}
+%event-button--expired{
+  @extend %event-button;
+  background-color:$dark-grey;
+  color:white;
+
+}
 
 button{
   background: none;

@@ -1,0 +1,132 @@
+@import "main";
+
+.events{
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    margin:1em 0 1.8em;
+    padding: 0 1.5em;
+  }
+  &__filter-menu{
+    display: none;
+  }
+  &__filter-menu__link{
+    display: inline-block;
+    button{
+      text-transform: uppercase;
+      color:$light-grey;
+      font-family: $main-font-semiBold;
+      font-size: .7em;
+      padding-left: 0;
+    }
+  }
+  &__filter-menu__link.active {
+    button{
+      color: $dark-grey;
+    }
+  }
+
+
+  &__filter-menu-m {
+    &__drop {
+      display: none;
+      position: absolute;
+      button {
+        width: 100%;
+        text-align: left;
+        padding-left: .2em;
+      }
+    }
+
+    &__title-btn::after {
+      @include arrow($dark-grey, .4em,"down");
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-bottom: 2px;
+    }
+
+    button {
+      text-transform: uppercase;
+      color: #323c46;
+      font-size: .78em;
+      font-family: $main-font-semiBold;
+
+      span {
+        color: $cool-grey-three;
+        font-family:$main-font-semiBold;
+      }
+    }
+
+
+    &__drop.open {
+      display: inline-block;
+      width: 5em;
+      border: 1px solid $dark-grey;
+      margin-left: 2.3em;
+      border-bottom: none;
+      border-radius: 3px;
+
+      li {
+        border-bottom: 1px solid $dark-grey;
+      }
+    }
+  }
+
+
+  &__layout-menu{
+    display: flex;
+    &__btn{
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 0;
+      width: 1.5em;
+      svg{
+        fill:$silver;
+        width: 1em;
+      }
+      svg.active{
+        fill:$dark-grey;
+      }
+    }
+    &__btn.column{
+      svg {
+        width: 1.2em;
+      }
+      margin-right:.3em;
+    }
+    &__btn.row{
+      margin-top:1px;
+    }
+  }
+
+
+}
+
+@media screen and (min-width: $small-vw) {
+  .events {
+    &__filter-menu-m{
+      display: none;
+    }
+    &__filter-menu{
+      display: inline-block;
+      &__link{
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        margin-right:1em;
+        button{
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: $medium-vw) {
+  .events {
+    &__header{
+      padding: 0;
+    }
+  }
+}

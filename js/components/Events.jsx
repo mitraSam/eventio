@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Header from "./MainHeader";
 import "styles/events";
 import "styles/spinner";
-
 import EventCard from "./EventCard";
 import EventsHeader from "./EventsHeader";
 import EventModal from "./EventModal";
@@ -116,7 +115,7 @@ class Events extends Component {
     } = this.state;
     const { history, events } = this.props;
     const open = showDropdown ? "open" : "";
-    const activeEvt = activeEvtModal ? "evt-modal" : "";
+    const activeEvt = activeEvtModal ? "openModal" : "";
 
     if (serverError)
       return (

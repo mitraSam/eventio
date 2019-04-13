@@ -1,5 +1,4 @@
 import React from "react";
-import "styles/login";
 import "styles/form";
 
 import WithCurrentUser from "../containers/WithCurrentUser";
@@ -24,6 +23,7 @@ class SignUp extends FormClass {
   handleSubmit = e => {
     e.preventDefault();
     if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
+      console.log("here");
       const data = this.dataFromFields();
       const { clearErrors, setUser, history } = this.props;
       clearErrors();

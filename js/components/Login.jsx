@@ -33,7 +33,7 @@ class Login extends FormClass {
   render() {
     const { email, password } = this.state;
     const { apiError, serverError } = this.props;
-    console.log(serverError);
+
     const error = apiError ? "error" : "";
     return (
       <div>
