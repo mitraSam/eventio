@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types"; // ES6
 
-import EventsPlaceholder from "./EventsPlaceholder";
+import EventsPlaceholder from "./placeholders/EventsPlaceholder";
 import WithCurrentUser from "../containers/WithCurrentUser";
-import SignUpPlaceholder from "./SignUpPlaceholder";
-import LoginPlaceholder from "./LoginPlaceholder";
+import SignUpPlaceholder from "./placeholders/SignUpPlaceholder";
+import LoginPlaceholder from "./placeholders/LoginPlaceholder";
 import { Redirect } from "react-router";
 
 class AsyncRoute extends Component {
