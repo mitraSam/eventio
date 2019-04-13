@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Header from "./MainHeader";
 import "styles/events";
-import "styles/spinner";
 import EventCard from "./EventCard";
 import EventsHeader from "./EventsHeader";
 import EventModal from "./EventModal";
 import ErrorDisplay from "./ErrorDisplay";
 import WithEvents from "../containers/WithEvents";
 import { dateToString, isDateFuture } from "../Utils";
+import Spinner from "./Spinner";
 
 class Events extends Component {
   state = {
@@ -152,24 +152,7 @@ class Events extends Component {
                   ))}
               </div>
             )}
-            {!events.length && (
-              <div className="spinner-wrap">
-                <div className="spinner">
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                </div>
-              </div>
-            )}
+            {!events.length && <Spinner />}
             <button
               onClick={this.handleOpenEvtModal}
               className="events__create--btn"

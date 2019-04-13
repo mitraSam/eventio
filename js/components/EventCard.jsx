@@ -39,8 +39,8 @@ EventCard.propTypes = {
   date: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  attendingNr: PropTypes.string.isRequired,
-  capacity: PropTypes.string.isRequired,
+  attendingNr: PropTypes.number.isRequired,
+  capacity: PropTypes.number.isRequired,
   button: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   layout: PropTypes.string.isRequired

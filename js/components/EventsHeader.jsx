@@ -81,12 +81,21 @@ const EventsHeader = ({
         >
           <svg
             data-style="row"
-            className={activeLayout === "row" ? "active" : ""}
-            viewBox="0 0 35 35"
             xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="13"
+            viewBox="0 0 17 13"
+            className={activeLayout === "row" ? "active" : ""}
           >
-            <rect data-style="row" y="19.52" width="35" height="15.48" />
-            <rect data-style="row" width="35" height="15.481" />
+            <g data-style="row" fill="none" fillRule="evenodd">
+              <path data-style="row" d="M-4-5h24v24H-4z" />
+              <path
+                className="events__layout-menu__btn__path"
+                data-style="row"
+                fill="#D9DCE1"
+                d="M0 13h17V7H0v6zM0 0v6h17V0H0z"
+              />
+            </g>
           </svg>
         </button>
       </li>

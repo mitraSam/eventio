@@ -38,8 +38,10 @@
         height: 100vh;
         .mainHeader{
             position: absolute;
-            &__logo{
-                color:#fff;
+            &__logo {
+                path {
+                    fill: white;
+                }
             }
         }
         main {

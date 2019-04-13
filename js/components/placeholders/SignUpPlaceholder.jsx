@@ -1,34 +1,33 @@
 import React from "react";
-import "styles/form";
-import "styles/mainHeader";
-import "styles/pagelayout";
+import "styles/pageLayoutPlaceholder";
+
 const SignUpPlaceholder = () => (
-  <div className="landing wrapper placeholder">
+  <div className="pageLayout">
     <header className="mainHeader">
       <nav className="mainHeader__nav">
         <a className="mainHeader__logo" rel="home" href="/">
-          E.
+          E.asdasd
         </a>
-        <ul className="hideLink mainHeader__nav__link-container">
-          <li className="mainHeader__nav--link">
-            <a href="/login">
-              Dont have an account?<span> Sign up</span>
+        <ul className="mainHeader__nav__menu hideOnMobile">
+          <li className="mainHeader__nav__link-container">
+            <a className="mainHeader__nav__link" href="/login">
+              Already have an account?<em> Sign in</em>
             </a>
           </li>
         </ul>
       </nav>
     </header>
     <main>
-      <section className="landing__banner">
+      <section className="pageLayout__banner">
         <blockquote>
-          <p>{`“Great,kid. Don't get cocky.”`}</p>
+          <p>{"“Great,kid. Don't get cocky.”"}</p>
           <hr />
           <footer>
             <cite>Han Solo</cite>
           </footer>
         </blockquote>
       </section>
-      <section className="landing__content">
+      <section className="pageLayout__content">
         <div className="login__form-wrapper">
           <form noValidate="" className="form-component ">
             <legend>Get started absolutely free</legend>
@@ -91,7 +90,7 @@ const SignUpPlaceholder = () => (
             <a
               className="form-component__bottomLink"
               escape="false"
-              href="/signup"
+              href="/login"
             >
               Already have an account ?<em> sign in</em>
             </a>

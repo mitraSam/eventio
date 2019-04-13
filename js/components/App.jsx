@@ -45,6 +45,7 @@ class App extends Component {
                   <AsyncRoute
                     props={props}
                     isPublic={true}
+                    path={"/login"}
                     loadingComponent={import("./PageLayoutLogin")}
                   />
                 );

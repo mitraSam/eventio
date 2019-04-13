@@ -1,21 +1,6 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
-export const submitData = (data, method) => {
-  const api = process.env.API_URL;
-  const key = process.env.API_KEY;
-  return axios({
-    method: "post",
-    url: `${api}`,
-    data,
-    config: {
-      headers: {
-        "Content-Type": "application/json",
-        APIKey: key
-      }
-    }
-  });
-};
 export const apiErroMessages = {
   ["User.InvalidPassword"]:
     "Ooops! That username & password combination is not valid",

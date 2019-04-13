@@ -83,10 +83,12 @@
       width: 1.5em;
       svg{
         fill:$silver;
-        width: 1em;
       }
       svg.active{
         fill:$dark-grey;
+        .events__layout-menu__btn__path{
+          fill:$dark-grey;
+        }
       }
     }
     &__btn.column{

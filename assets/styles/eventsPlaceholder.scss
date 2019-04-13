@@ -1,0 +1,454 @@
+
+$warm-grey: #7d7878;
+$silver-four: #c4c9d1;
+$darkish-pink: #e73370;
+$warm-pink: #ff4081;
+$dark-mint-green-two: #20bd78;
+$silver-seven: #cacdd0;
+$pale-grey-two: #f9f9fb;
+$red-pink: #fc226e;
+$cool-grey-two: #9ca5af;
+$silver: #d9dce1;
+$pale-grey-two: #f9f9fb;
+$cool-grey: #949ea8;
+$cool-grey-three: #a9aeb4;
+$silver-three:#c9ced3;
+$lighter-grey:rgb(213,217,221);
+$error-pink:rgb(255,76,137);
+$lighter-grey: rgb(213,217,221);
+$light-grey:rgb(149,159,169);
+$grey: rgb(126,121,121);
+$dark-grey: #323c46;
+$light-green: rgb(34,212,134);
+$off-white: rgb(249,249,251);
+
+$small-vw:40em;
+$medium-vw:60em;
+$large-vw:80em;
+
+@mixin arrow($color,$size,$pointer){
+  width: 0;
+  height: 0;
+  border-style: solid;
+  @if $pointer =="down"{
+    border-color: $color transparent transparent transparent;
+    border-width: $size $size 0 $size;
+
+  }
+  @if $pointer =="up"{
+    border-width: 0 $size $size $size;
+    border-color: transparent transparent $color transparent;
+  }
+  display: inline-block;
+  content: "";
+}
+
+
+.mainHeader {
+  padding: 2em 2em 0;
+  margin-bottom: 3.5em;
+  .hideOnMobile{
+    display: none;
+  }
+  &__nav {
+    display: flex;
+    &__menu {
+      display: flex;
+      margin-left: auto;
+      position: relative;
+    }
+    &__link-menu--hide{
+      display: none;
+    }
+    &__link-container{
+      display: flex;
+      align-items: center;
+    }
+    &__link-container.initials{
+      width: 2em;
+      height: 2em;
+      background: $silver;
+      border-radius: 50%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center;
+      margin-right: .5em;
+      span{
+        color:$cool-grey;
+        font-size: .7em;
+        font-family: Trebuchet;
+      }
+    }
+    &__link-container.arrow{
+      background: none;
+      border: none;
+      button{
+        display: flex;
+        justify-content: center;
+        width: 1em;
+        height: 2.5em;
+        align-items: center;
+      }
+      button::after{
+        @include arrow($silver,.4em,"down");
+      }
+    }
+    &__link-container.arrow:hover{
+      cursor: pointer;
+    }
+
+    &__link-container.name{
+      font-family: Trebuchet;
+      font-size: .73em;
+      color:$cool-grey;
+      margin-right: .5em;
+    }
+    &__link-container.logout{
+      position: absolute;
+      top: 2.2em;
+      right: 0;
+      border-radius: 10px;
+      padding: .3em .4em;
+      width: 10em;
+      text-align: right;
+      color: #323c46;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+      button{
+        cursor: pointer;
+        font-size: .88em;
+        color:$cool-grey-two;
+        width: 100%;
+        text-align: left;
+      }
+    }
+    &__link-container.logout.hide{
+      display: none;
+    }
+
+    &__link{
+      font-size: .9rem;
+      font-family: Trebuchet;
+      color:$silver-three;
+      em{
+        font-weight: 600;
+        color: $cool-grey;
+
+        text-transform: uppercase;
+      }
+    }
+
+  }
+  &__logo {
+    font-family:Trebuchet;
+    color: var(--dark-grey);
+    text-decoration: none;
+    font-size: 1.9rem;
+    width: 1em;
+    height: 1em;
+
+  }
+}
+
+@media screen and (min-width: $small-vw){
+  .mainHeader {
+    font-size:1.22em;
+  }
+}
+@media screen and (min-width: $large-vw) {
+  .mainHeader {
+    padding: 2em 3em 0;
+    width: 100%;
+    z-index: 2;
+    .hideOnMobile {
+      display: flex;
+    }
+    &__nav {
+      display: flex;
+      justify-content: space-between;
+      &__link {
+        .hideOnMobile{
+          display: inline-block;
+        }
+      }
+    }
+
+  }
+}
+
+.events{
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    margin:1em 0 1.8em;
+    padding: 0 1.5em;
+  }
+  &__filter-menu{
+    display: none;
+  }
+  &__filter-menu__link{
+    display: inline-block;
+    button{
+      text-transform: uppercase;
+      color:$light-grey;
+      font-family: Trebuchet;
+      font-size: .7em;
+      padding-left: 0;
+    }
+  }
+  &__filter-menu__link.active {
+    button{
+      color: $dark-grey;
+    }
+  }
+
+
+  &__filter-menu-m {
+    &__drop {
+      display: none;
+      position: absolute;
+      button {
+        width: 100%;
+        text-align: left;
+        padding-left: .2em;
+      }
+    }
+
+    &__title-btn::after {
+      @include arrow($dark-grey, .4em,"down");
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-bottom: 2px;
+    }
+
+    button {
+      text-transform: uppercase;
+      color: #323c46;
+      font-size: .78em;
+      font-family: Trebuchet;
+
+      span {
+        color: $cool-grey-three;
+        font-family:Trebuchet;
+      }
+    }
+
+
+    &__drop.open {
+      display: inline-block;
+      width: 5em;
+      border: 1px solid $dark-grey;
+      margin-left: 2.3em;
+      border-bottom: none;
+      border-radius: 3px;
+
+      li {
+        border-bottom: 1px solid $dark-grey;
+      }
+    }
+  }
+
+
+  &__layout-menu{
+    display: flex;
+    &__btn{
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 0;
+      width: 1.5em;
+      svg{
+        fill:$silver;
+      }
+      svg.active{
+        fill:$dark-grey;
+        .events__layout-menu__btn__path{
+          fill:$dark-grey;
+        }
+      }
+    }
+    &__btn.column{
+      svg {
+        width: 1.2em;
+      }
+      margin-right:.3em;
+    }
+    &__btn.row{
+      margin-top:1px;
+    }
+  }
+
+
+}
+
+@media screen and (min-width: $small-vw) {
+  .events {
+    &__filter-menu-m{
+      display: none;
+    }
+    &__filter-menu{
+      display: inline-block;
+      &__link{
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        margin-right:1em;
+        button{
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: $medium-vw) {
+  .events {
+    &__header{
+      padding: 0;
+    }
+  }
+}
+
+@import "main";
+
+.events.error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .error-display{
+    text-align: center;
+  }
+}
+
+.events {
+  background: $pale-grey-two;
+
+  main{
+    display: flex;
+    flex-direction: column;
+    margin:0 .5em;
+  }
+  &__form-wrapper {
+    padding: .5em;
+    .form-component{
+      background: #fff;
+      padding:2.5em 1em;
+      max-width: 95vw;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.16), 0 0 0 rgba(0,0,0,0.23);
+
+      &__submit{
+        margin-top: initial;
+      }
+
+    }
+  }
+  &__close-modal{
+    position: absolute;
+    right: 2em;
+    top:2.4em;
+    background-position: center;
+    background-color: transparent;
+    background-size:.9em .9em;
+    background-image: url("../images/close-icon.svg");
+    width: 2em;
+    height: 2em;
+    background-repeat: no-repeat;
+
+    span{
+      display: none;
+    }
+  }
+
+
+  &__create--btn{
+    color: white;
+    background: $dark-grey;
+    width: 2em;
+    height: 2em;
+    line-height: 2.1;
+    border-radius: 50%;
+    font-size: 1.8em;
+    font-family: $main-font-light;
+    margin: .5em;
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.15);
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.events.openModal {
+  .mainHeader {
+    margin-bottom:0;
+    &__nav__link-container {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: $small-vw) {
+  .events {
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    &__form-wrapper{
+      width: 40em;
+      margin-left:auto;
+      margin-right: auto;
+      .form-component{
+        padding: 2em;
+      }
+    }
+
+
+  }
+}
+@media screen and (min-width: $medium-vw) {
+  .events {
+    main{
+      width: 59em;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (min-width: $large-vw) {
+  .events{
+
+    main {
+      width: 78vw;
+      margin: 4em auto 0;
+      padding-bottom: 2em;
+      min-height: 100vh;
+    }
+    &__container {
+      justify-content: initial;
+    }
+    &__form-wrapper{
+      width: 30em;
+    }
+    .form-component__submit{
+      margin-bottom: initial;
+    }
+
+    &__close-modal {
+      width: 6em;
+      height: 2em;
+      font-size: 1em;
+      background-repeat: no-repeat;
+      background-position: 3px 7px;
+
+      span {
+        display: block;
+      }
+    }
+
+
+  }
+
+}
+
+
