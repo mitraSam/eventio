@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "styles/eventsHeader";
 const EventsHeader = ({
   selectedFilter,
@@ -92,5 +93,13 @@ const EventsHeader = ({
     </ul>
   </header>
 );
-
+EventsHeader.propTypes = {
+  selectedFilter: PropTypes.string.isRequired,
+  filters: PropTypes.array.isRequired,
+  activeLayout: PropTypes.string.isRequired,
+  open: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  changeLayout: PropTypes.func.isRequired,
+  modifyDropdown: PropTypes.func.isRequired
+};
 export default EventsHeader;

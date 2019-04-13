@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Header from "./MainHeader";
 import "styles/events";
 import "styles/spinner";
@@ -7,7 +8,7 @@ import EventsHeader from "./EventsHeader";
 import EventModal from "./EventModal";
 import ErrorDisplay from "./ErrorDisplay";
 import WithEvents from "../containers/WithEvents";
-import { isDateFuture } from "../Utils";
+import { dateToString, isDateFuture } from "../Utils";
 
 class Events extends Component {
   state = {
@@ -19,16 +20,16 @@ class Events extends Component {
     serverError: false
   };
 
-  componentDidUpdate(prevProps) {
-    const { events } = this.props;
-    if (events.length > prevProps.events.length) this.closeModal();
-  }
-
   componentDidMount() {
     const { tokenStillAvailable, history } = this.props;
     if (!tokenStillAvailable()) return history.push("/login");
     const { getEvents } = this.props;
     getEvents();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { events } = this.props;
+    if (events.length > prevProps.events.length) this.closeModal();
   }
 
   modifyDropdown = () => {
@@ -57,23 +58,9 @@ class Events extends Component {
   };
 
   shortenText = str => str.slice(0, 30).concat("...");
-  openEvtModal = () => this.setState({ activeEvtModal: true });
-  parseDate(evtDate) {
-    const options = {
-      timeZone: "Europe/Prague",
-      year: "numeric",
-      minute: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric"
-    };
-    const date = new Date(evtDate);
-    const formatedDate = new Intl.DateTimeFormat("en-US", options).format(
-      date,
-      options
-    );
-    return formatedDate.replace(/,([^,]*)$/, " - $1");
-  }
+  handleOpenEvtModal = () => this.setState({ activeEvtModal: true });
+
+  parseDate = evtDate => dateToString(evtDate);
   setEvtBtn(id, attendees, start) {
     const { currentUser } = this.props;
     if (!isDateFuture(new Date(start))) {
@@ -125,7 +112,7 @@ class Events extends Component {
       );
     return (
       <div className={`events wrapper ${activeEvt}`}>
-        <Header history={history} hideLink={activeEvt ? true : ""} />
+        <Header history={history} isOnAuth={activeEvt ? true : ""} />
         {!activeEvtModal && (
           <main>
             <EventsHeader
@@ -183,14 +170,17 @@ class Events extends Component {
                 </div>
               </div>
             )}
-            <button onClick={this.openEvtModal} className="events__create--btn">
+            <button
+              onClick={this.handleOpenEvtModal}
+              className="events__create--btn"
+            >
               +
             </button>
           </main>
         )}
         {activeEvtModal && (
           <EventModal
-            closeModal={this.closeModal}
+            handleCloseModal={this.closeModal}
             apiError={this.props.apiError}
             history={history}
             tokenStillAvailable={this.props.tokenStillAvailable}
@@ -203,5 +193,18 @@ class Events extends Component {
     );
   }
 }
+
+Events.propTypes = {
+  tokenStillAvailable: PropTypes.func.isRequired,
+  getEvents: PropTypes.func.isRequired,
+  joinEvt: PropTypes.func.isRequired,
+  leaveEvt: PropTypes.func.isRequired,
+  createEvt: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  apiError: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
+  events: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired
+};
 
 export default WithEvents(Events);

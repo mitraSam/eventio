@@ -9,7 +9,6 @@ export const serverError = (state = false, action) => {
 
 export const apiError = (state = "", action) => {
   if (action.type === SET_API_ERROR) {
-    console.log("from the apiii!!!!!!", action);
     return action.payload;
   }
   return state;

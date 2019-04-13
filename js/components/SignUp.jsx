@@ -5,6 +5,7 @@ import WithCurrentUser from "../containers/WithCurrentUser";
 import ErrorDisplay from "./ErrorDisplay";
 import { Link } from "react-router-dom";
 import FormClass from "./FormClass";
+import PropTypes from "prop-types";
 
 class SignUp extends FormClass {
   state = {
@@ -23,7 +24,6 @@ class SignUp extends FormClass {
   handleSubmit = e => {
     e.preventDefault();
     if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
-      console.log("here");
       const data = this.dataFromFields();
       const { clearErrors, setUser, history } = this.props;
       clearErrors();
@@ -144,7 +144,7 @@ class SignUp extends FormClass {
             </p>
             <Link
               className="form-component__bottomLink"
-              to={`/login`}
+              to="/login"
               escape="false"
             >
               Already have an account ?<em> sign in</em>
@@ -164,5 +164,14 @@ class SignUp extends FormClass {
     );
   }
 }
+
+SignUp.propTypes = {
+  history: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  apiError: PropTypes.string.isRequired,
+  serverError: PropTypes.bool.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired
+};
 
 export default WithCurrentUser(SignUp);

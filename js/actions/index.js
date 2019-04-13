@@ -22,17 +22,6 @@ export const clearErrors = () => dispatch => {
   dispatch(setApiError(""));
 };
 
-export const doAuthentication = (data, history, type) => dispatch => {
-  const param = type === "create" ? "users" : "auth/native";
-  postData(param, data)
-    .then(res => {
-      setUserToken(res.headers.authorization);
-      dispatch(setCurrentUser(getUserFromToken()));
-      if (history) history.push("/events");
-    })
-    .catch(handleError(dispatch));
-};
-
 const handleError = dispatch => err => {
   const { response } = err;
   if (!response) {
@@ -44,6 +33,29 @@ const handleError = dispatch => err => {
   } else {
     dispatch(setApiError(error));
   }
+};
+
+export const handleAddEventError = dispatch => err => {
+  const { response } = err;
+  const fields = ["startsAt", "title", "description"];
+  if (!response) return dispatch(setServerError(true));
+  const { errors } = response.data;
+  if (Array.isArray(errors)) return dispatch(setApiError(errors[0].message));
+
+  fields.forEach(field => {
+    if (field in errors) return dispatch(setApiError(errors[field].message));
+  });
+};
+
+export const doAuthentication = (data, history, type) => dispatch => {
+  const param = type === "create" ? "users" : "auth/native";
+  postData(param, data)
+    .then(res => {
+      setUserToken(res.headers.authorization);
+      dispatch(setCurrentUser(getUserFromToken()));
+      if (history) history.push("/events");
+    })
+    .catch(handleError(dispatch));
 };
 
 export const loadEvents = () => dispatch => {
@@ -81,16 +93,4 @@ export const addEvent = data => dispatch => {
 export const logUserOut = () => dispatch => {
   removeUserToken();
   dispatch(setCurrentUser({}));
-};
-
-export const handleAddEventError = dispatch => err => {
-  const { response } = err;
-  const fields = ["startsAt", "title", "description"];
-  if (!response) return dispatch(setServerError(true));
-  const { errors } = response.data;
-  if (Array.isArray(errors)) return dispatch(setApiError(errors[0].message));
-
-  fields.forEach(field => {
-    if (field in errors) return dispatch(setApiError(errors[field].message));
-  });
 };

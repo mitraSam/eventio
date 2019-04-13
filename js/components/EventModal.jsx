@@ -68,7 +68,10 @@ class EventModal extends FormClass {
 
     return (
       <div className="events__form-wrapper">
-        <button onClick={this.props.closeModal} className="events__close-modal">
+        <button
+          onClick={this.props.handleCloseModal}
+          className="events__close-modal"
+        >
           <span>Close</span>
         </button>
         <form

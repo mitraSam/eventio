@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 export const submitData = (data, method) => {
   const api = process.env.API_URL;
   const key = process.env.API_KEY;
-  console.log(data, method, key, api);
   return axios({
     method: "post",
     url: `${api}`,
@@ -82,3 +81,20 @@ export const validateEmail = string => /^[a-z](\w*)+@strv.com/iu.test(string);
 
 export const firstLetterUppercase = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
+
+export const dateToString = evtDate => {
+  const options = {
+    timeZone: "Europe/Prague",
+    year: "numeric",
+    minute: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric"
+  };
+  const date = new Date(evtDate);
+  const formatedDate = new Intl.DateTimeFormat("en-US", options).format(
+    date,
+    options
+  );
+  return formatedDate.replace(/,([^,]*)$/u, " - $1");
+};

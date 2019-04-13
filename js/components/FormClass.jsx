@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import {
   getUserFromToken,
   setUserToken,
@@ -130,5 +131,10 @@ class FormClass extends Component {
 
   clearErrors = () => this.setState({ apiError: "" });
 }
+
+FormClass.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default FormClass;

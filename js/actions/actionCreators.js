@@ -22,6 +22,6 @@ export function setEvents(data) {
 export function updateEventInEvents(updatedEvent) {
   return { type: UPDATE_EVENT_IN_EVENTS, payload: updatedEvent };
 }
-export function addEventToEvents(event) {
-  return { type: ADD_EVENT_TO_EVENTS, payload: event };
+export function addEventToEvents(e) {
+  return { type: ADD_EVENT_TO_EVENTS, payload: e };
 }

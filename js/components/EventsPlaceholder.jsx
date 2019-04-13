@@ -6,10 +6,10 @@ const EventsPlaceholder = () => (
   <div className="events wrapper placeholder">
     <header className="mainHeader">
       <nav className="mainHeader__nav">
-        <Link className="mainHeader__logo" to={"/"} rel="home">
+        <Link className="mainHeader__logo" to="/" rel="home">
           E.
         </Link>
-        <ul className={`mainHeader__nav__link-container`}>
+        <ul className="mainHeader__nav__link-container">
           <li className="mainHeader__nav--initials" />
           <li>
             <button className="mainHeader__nav--arrow" />

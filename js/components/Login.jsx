@@ -1,6 +1,6 @@
 import React from "react";
 import "styles/form";
-
+import PropTypes from "prop-types";
 import WithCurrentUser from "../containers/WithCurrentUser";
 import ErrorDisplay from "./ErrorDisplay";
 import { Link } from "react-router-dom";
@@ -83,7 +83,7 @@ class Login extends FormClass {
             </p>
             <Link
               className="form-component__bottomLink"
-              to={`/signup`}
+              to="/signup"
               escape="false"
             >
               {`Don't have an account ?`}
@@ -103,5 +103,14 @@ class Login extends FormClass {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  apiError: PropTypes.string.isRequired,
+  serverError: PropTypes.bool.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired
+};
 
 export default WithCurrentUser(Login);

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types"; // ES6
 
 import EventsPlaceholder from "./EventsPlaceholder";
 import WithCurrentUser from "../containers/WithCurrentUser";
@@ -10,8 +11,6 @@ class AsyncRoute extends Component {
     loaded: false
   };
 
-  component = null;
-
   componentDidMount() {
     const { loadingComponent } = this.props;
     loadingComponent.then(module => {
@@ -19,6 +18,8 @@ class AsyncRoute extends Component {
       this.setState({ loaded: true });
     });
   }
+
+  component = null;
 
   setPlaceholder() {
     const { path } = this.props;
@@ -28,12 +29,12 @@ class AsyncRoute extends Component {
   }
 
   render() {
-    const { protect, currentUser, noUser } = this.props;
-    if (protect && !currentUser.id) {
-      return <Redirect to={"/login"} />;
+    const { isPrivate, currentUser, isPublic } = this.props;
+    if (isPrivate && !currentUser.id) {
+      return <Redirect to="/login" />;
     }
-    if (noUser && currentUser.id) {
-      return <Redirect to={"/events"} />;
+    if (isPublic && currentUser.id) {
+      return <Redirect to="/events" />;
     }
 
     const { loaded } = this.state;
@@ -45,5 +46,17 @@ class AsyncRoute extends Component {
     return this.setPlaceholder();
   }
 }
-
+AsyncRoute.defaultProps = {
+  path: "",
+  isPrivate: false,
+  isPublic: false
+};
+AsyncRoute.propTypes = {
+  loadingComponent: PropTypes.element.isRequired,
+  path: PropTypes.string,
+  props: PropTypes.object.isRequired,
+  isPrivate: PropTypes.bool,
+  currentUser: PropTypes.object.isRequired,
+  isPublic: PropTypes.bool
+};
 export default WithCurrentUser(AsyncRoute);

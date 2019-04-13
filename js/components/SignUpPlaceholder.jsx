@@ -21,7 +21,7 @@ const SignUpPlaceholder = () => (
     <main>
       <section className="landing__banner">
         <blockquote>
-          <p>{"“Great,kid. Don't get cocky.”"}</p>
+          <p>{`“Great,kid. Don't get cocky.”`}</p>
           <hr />
           <footer>
             <cite>Han Solo</cite>

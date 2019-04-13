@@ -1,17 +1,13 @@
 {
   "extends": [
-    "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:react/recommended",
+    "@strv/eslint-config-react",
     "plugin:jsx-a11y/recommended",
     "prettier",
     "prettier/react"
   ],
   "rules": {
-    "react/prop-types": 0,
-    "jsx-a11y/label-has-for": 0,
-    "no-console": 1,
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "no-shadow": "off"
   },
   "plugins": ["react", "import", "jsx-a11y"],
   "parser": "babel-eslint",

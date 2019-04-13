@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "styles/eventCard";
 const EventCard = ({
   description,
@@ -32,5 +33,17 @@ const EventCard = ({
     </div>
   </div>
 );
+
+EventCard.propTypes = {
+  description: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  attendingNr: PropTypes.string.isRequired,
+  capacity: PropTypes.string.isRequired,
+  button: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  layout: PropTypes.string.isRequired
+};
 
 export default EventCard;

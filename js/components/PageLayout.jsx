@@ -1,19 +1,23 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "styles/main";
 import "styles/pageLayout";
 
 import Header from "./MainHeader";
 
-const Landing = (ChildComponent, onLogin, onSignUp) =>
+const PageLayout = (ChildComponent, onLogin, onSignUp) =>
   class Wrapper extends Component {
+    static propTypes = {
+      history: PropTypes.object.isRequired
+    };
     render() {
       const bannerText = "“Great,kid. Don't get cocky.”";
       return (
         <div className="pageLayout">
           <Header
             history={this.props.history}
-            onSignUp={onSignUp}
-            hideLink={onLogin}
+            isOnSignup={onSignUp}
+            isOnAuth={onLogin}
           />
           <main>
             <section className="pageLayout__banner">
@@ -37,4 +41,5 @@ const Landing = (ChildComponent, onLogin, onSignUp) =>
       );
     }
   };
-export default Landing;
+
+export default PageLayout;
