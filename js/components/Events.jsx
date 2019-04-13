@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "./Header";
+import Header from "./MainHeader";
 import "styles/events";
 import "styles/spinner";
 
@@ -103,8 +103,6 @@ class Events extends Component {
   closeModal = () => {
     this.setState({ activeEvtModal: false });
   };
-
-  addEvent = () => this.props.createEvt();
 
   edit = () => console.log("to be implemented");
   render() {

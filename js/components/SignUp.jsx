@@ -144,7 +144,7 @@ class SignUp extends FormClass {
             </p>
             <Link
               className="form-component__bottomLink"
-              to={`/signup`}
+              to={`/login`}
               escape="false"
             >
               Already have an account ?<em> sign in</em>

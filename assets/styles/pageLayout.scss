@@ -1,16 +1,6 @@
 @import "main";
 
-.wrapper{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 90vw;
-    margin-left: auto;
-    margin-right:auto
-}
-
-.landing{
+.pageLayout{
         &__content{
         text-align:center;
         padding: 0 2em;
@@ -25,18 +15,27 @@
 }
 
 @media screen and (min-width: $small-vw) {
-    .landing{
+    .pageLayout{
         max-width: 70vw;
+        margin-left: auto;
+        margin-right: auto;
+        &__content{
+            font-size: 1.25em;
+        }
+        .form-component__input::placeholder {
+            font-size: 1.1rem;
+        }
     }
 }
-@media screen and (min-width: $large-vw) {
-    .wrapper{
-        max-width: initial;
-        display: flex;
-        justify-content: initial;
-    }
 
-    .landing{
+
+@media screen and (min-width: $large-vw) {
+
+    .pageLayout{
+        margin: initial;
+        display: flex;
+        max-width: initial;
+        height: 100vh;
         .mainHeader{
             position: absolute;
             &__logo{
@@ -49,20 +48,22 @@
         }
             &__content{
             display: flex;
-            width: 75vw;
+            width: 65vw;
             padding-left: 20vw;
             align-content: center;
             align-items: center;
-
+                text-align: left;
+                font-size: 1em;
         }
         &__banner{
             display: flex;
             align-items: end;
+            width: 33vw;
             justify-content: center;
             text-align: center;
             flex: 1;
             color:#fff;
-            padding: 2.5em;
+            padding: 4.5vw;
             background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/trooper.jpg');
             background-position: center center;
             background-size: 100%;
@@ -72,7 +73,7 @@
             }
             p{
                 font-family: $second-font;
-                font-size: 1.7em;
+                font-size: 2.3em;
                 margin-bottom: .8em;
             }
             hr{
@@ -87,27 +88,9 @@
                 font-size: .9em;
             }
         }
-    }
 
-
-}
-
-@media screen and (min-width:40em) {
-    .landing {
-        font-size: 1.2em;
-
-        .form-component__input::placeholder {
-            font-size: 1.1rem;
-        }
-    }
-}
-
-@media screen and (min-width: $large-vw) {
-    .landing {
-        font-size: 1em;
-        text-align: left;
         .form-component{
-            width: 21em;
+            width: 25em;
             legend{
                 text-align: left;
             }
@@ -117,16 +100,37 @@
             &__submit{
                 margin-left: initial;
                 padding: 1em;
-                width: 16em;
+                font-size: 1rem;
+                margin-bottom: 0;
             }
             &__input::placeholder{
                 font-size: 1rem;
             }
+            sub{
+                font-size: 1.124em;
+            }
+            &__input{
+                font-size: 1.124em;
+            }
+            &__annot{
+                font-size: .88em;
+            }
+            legend{
+                font-size: 1.75em;
+            }
+            &__apiError{
+                text-align: left;
+                font-size: 1.12em;
+            }
+
             &__bottomLink{
                 display: none;
 
             }
         }
 
+
     }
+
+
 }

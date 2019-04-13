@@ -91,7 +91,7 @@
     }
 
     &--title-btn::after {
-      @include arrow($dark-grey, .4em);
+      @include arrow($dark-grey, .4em,"bottom");
       vertical-align: middle;
       margin-left: 5px;
       margin-bottom: 2px;

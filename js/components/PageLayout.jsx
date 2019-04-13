@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import "styles/main";
-import "styles/pagelayout";
+import "styles/pageLayout";
 
-import Header from "./Header";
+import Header from "./MainHeader";
 
 const Landing = (ChildComponent, onLogin, onSignUp) =>
   class Wrapper extends Component {
     render() {
       const bannerText = "“Great,kid. Don't get cocky.”";
       return (
-        <div className="landing wrapper">
+        <div className="pageLayout">
           <Header
             history={this.props.history}
             onSignUp={onSignUp}
             hideLink={onLogin}
           />
           <main>
-            <section className="landing__banner">
+            <section className="pageLayout__banner">
               <blockquote>
                 <p>{bannerText}</p>
                 <hr />
@@ -25,7 +25,7 @@ const Landing = (ChildComponent, onLogin, onSignUp) =>
                 </footer>
               </blockquote>
             </section>
-            <section className="landing__content">
+            <section className="pageLayout__content">
               {ChildComponent ? (
                 <ChildComponent history={this.props.history} />
               ) : (

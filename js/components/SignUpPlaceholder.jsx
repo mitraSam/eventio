@@ -1,6 +1,6 @@
 import React from "react";
 import "styles/form";
-import "styles/header";
+import "styles/mainHeader";
 import "styles/pagelayout";
 const SignUpPlaceholder = () => (
   <div className="landing wrapper placeholder">
