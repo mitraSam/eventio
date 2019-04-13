@@ -3,8 +3,11 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const cssnano = require("cssnano");
 const autoprefixer = require("autoprefixer");
 const webpack = require("webpack");
-
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 const MiniCssPlugin = new MiniCssExtractPlugin({
   filename: "styles.css"
@@ -40,6 +43,9 @@ module.exports = {
       }
     ]
   },
+  output: {
+    filename: "[name].[contenthash].js"
+  },
   optimization: {
     minimizer: [
       new UglifyJSPlugin({
@@ -50,7 +56,11 @@ module.exports = {
           }
         }
       })
-    ]
+    ],
+    runtimeChunk: false,
+    splitChunks: {
+      chunks: "all"
+    }
   },
   plugins: [
     MiniCssPlugin,
@@ -59,6 +69,17 @@ module.exports = {
       options: {
         postcss: [autoprefixer()]
       }
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
+    new HtmlWebpackPlugin({
+      hash: true,
+      filename: "index.html",
+      title: "Eventio",
+      template: "./assets/index.html"
     })
   ]
 };
