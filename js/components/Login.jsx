@@ -15,8 +15,9 @@ class Login extends FormClass {
   };
 
   componentDidMount() {
-    const { history, currentUser } = this.props;
+    const { history, currentUser, clearErrors } = this.props;
     if (currentUser.id) history.push("/events");
+    clearErrors();
   }
 
   handleSubmit = e => {
