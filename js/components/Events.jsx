@@ -112,7 +112,7 @@ class Events extends Component {
       );
     return (
       <div className={`events wrapper ${activeEvt}`}>
-        <Header isOnAuth={activeEvt ? true : ""} />
+        <Header isOnAuth={activeEvt ? true : false} />
         {!activeEvtModal && (
           <main>
             <EventsHeader

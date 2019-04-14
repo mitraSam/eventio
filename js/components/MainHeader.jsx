@@ -87,7 +87,7 @@ class MainHeader extends Component {
 }
 
 MainHeader.defaultProps = {
-  isOnAuth: "",
+  isOnAuth: false,
   isOnSignup: false
 };
 
@@ -95,7 +95,7 @@ MainHeader.propTypes = {
   tokenStillAvailable: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
-  isOnAuth: PropTypes.string,
+  isOnAuth: PropTypes.bool,
   isOnSignup: PropTypes.bool
 };
 

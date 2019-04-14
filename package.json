@@ -73,7 +73,8 @@
     "test": "jest",
     "test:update": "set NODE_ENV=test&& jest -u",
     "test:coverage": "jest --coverage",
-    "build:dev": "webpack -d"
+    "build:dev": "webpack -d",
+    "prettier": "prettier"
   },
   "jest": {
     "snapshotSerializers": [

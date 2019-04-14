@@ -28,7 +28,6 @@ class AsyncRoute extends Component {
     if (path === "/login") return <LoginPlaceholder />;
     return "";
   }
-
   render() {
     const { loaded } = this.state;
     const { props } = this.props;
