@@ -18,15 +18,20 @@ class SignUp extends FormClass {
 
     componentDidMount() {
         const {clearErrors} = this.props;
+        /* clear server & api errors => triggers reducer action */
+
         clearErrors();
     }
 
     handleSubmit = e => {
         e.preventDefault();
+
+        /* check if form inputs contain any value & if their corresponding state[field][error] props hold no values */
         if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
             const data = this.dataFromFields();
             const {clearErrors, setUser} = this.props;
             clearErrors();
+            /* create user and log user in => triggers reducer action */
             setUser(data, 'create');
         }
     };

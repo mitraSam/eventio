@@ -16,16 +16,19 @@ class Login extends FormClass {
 
     componentDidMount() {
         const {clearErrors} = this.props;
+        /* clear server & api errors => triggers reducer action */
         clearErrors();
     }
 
     handleSubmit = e => {
         e.preventDefault();
+        /* check if form inputs contain any value & if their corresponding state[field][error] props hold no values */
         if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
             const {password, email} = this.state;
             const data = {password: password.value, email: email.value};
             const {setUser, clearErrors} = this.props;
             clearErrors();
+            /* log user in => triggers reduce action */
             setUser(data);
         }
     };

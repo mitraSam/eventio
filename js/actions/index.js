@@ -28,6 +28,8 @@ const handleError = dispatch => err => {
         dispatch(setServerError(true));
     }
     const {error} = response.data;
+
+    /* if there is a default message provided for error type set apiError to reference it */
     if (apiErroMessages[error]) {
         dispatch(setApiError(apiErroMessages[error]));
     } else {
@@ -40,6 +42,9 @@ export const handleAddEventError = dispatch => err => {
     const fields = ['startsAt', 'title', 'description'];
     if (!response) return dispatch(setServerError(true));
     const {errors} = response.data;
+    /* validation errors for the events api come it two forms: array || objects
+     * set apiError according to type of error object
+     * */
     if (Array.isArray(errors)) return dispatch(setApiError(errors[0].message));
 
     fields.forEach(field => {
@@ -51,6 +56,7 @@ export const doAuthentication = (data, type) => dispatch => {
     const param = type === 'create' ? 'users' : 'auth/native';
     postData(param, data)
         .then(res => {
+            /* set user auth token in localStorage, decode it and update store currentUser prop to reference the data object */
             setUserToken(res.headers.authorization);
             dispatch(setCurrentUser(getUserFromToken()));
         })
@@ -59,6 +65,7 @@ export const doAuthentication = (data, type) => dispatch => {
 
 export const loadEvents = () => dispatch => {
     getData('events')
+        /* trigger events reducer to update  events prop  */
         .then(({data}) => dispatch(setEvents(data)))
         .catch(handleError(dispatch));
 };
@@ -66,6 +73,7 @@ export const loadEvents = () => dispatch => {
 export const joinEvent = param => dispatch => {
     const token = getUserToken();
     postData(param, {}, token)
+        /* trigger events reducer to update  events prop with event  */
         .then(({data}) => dispatch(updateEventInEvents(data)))
         .catch(handleError(dispatch));
 };
@@ -74,6 +82,7 @@ export const leaveEvent = param => dispatch => {
     const token = getUserToken();
     deleteData(param, token)
         .then(({data}) => {
+            /* trigger events reducer to update  events prop with event  */
             dispatch(updateEventInEvents(data));
         })
         .catch(handleError(dispatch));
@@ -84,12 +93,14 @@ export const addEvent = data => dispatch => {
 
     postData('events', data, token)
         .then(({data}) => {
+            /* trigger events reducer to update  events prop with new event  */
             dispatch(addEventToEvents(data));
         })
         .catch(handleAddEventError(dispatch));
 };
 
 export const logUserOut = () => dispatch => {
+    /* remove user token & trigger currentUser reducer to set currentUser prop to empty obj */
     removeUserToken();
     dispatch(setCurrentUser({}));
 };

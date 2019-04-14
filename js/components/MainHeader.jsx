@@ -14,6 +14,7 @@ class MainHeader extends Component {
 
     handleLogout = () => {
         const {logout} = this.props;
+        /* log user out =>triggers reduce action */
         logout();
     };
 

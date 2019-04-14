@@ -13,6 +13,7 @@ module.exports = {
             },
         ],
     },
+    /* enable hot reload*/
     entry: [
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://localhost:8080',

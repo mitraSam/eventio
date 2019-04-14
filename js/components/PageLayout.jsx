@@ -4,6 +4,7 @@ import 'styles/pageLayout';
 
 import Header from './MainHeader';
 
+/* wrap children components and display them according to page layout design */
 const PageLayout = (ChildComponent, onLogin, onSignUp) =>
     class Wrapper extends Component {
         render() {

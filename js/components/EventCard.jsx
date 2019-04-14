@@ -16,7 +16,7 @@ const EventCard = ({description, date, title, author, attendingNr, capacity, but
                 data-id={id}
                 data-action={button.type}
                 className={`events__card__btn-${button.type}`}
-                onClick={button.method ? button.method : null}>
+                onClick={button.method}>
                 {button.type}
             </button>
         </div>

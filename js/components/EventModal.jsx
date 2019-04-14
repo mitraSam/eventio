@@ -4,6 +4,9 @@ import 'styles/form';
 import FormClass from './FormClass';
 
 class EventModal extends FormClass {
+    /* each field has an object associated with it that keeps track of it's value & error
+     * if value holds an empty string || error holds one the form will not be submitted
+     * */
     state = {
         apiError: '',
         serverError: '',
@@ -22,11 +25,18 @@ class EventModal extends FormClass {
 
     handleSubmit = e => {
         e.preventDefault();
+        /* check if form fields are empty && their state error value is empty */
         if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
             const {addEvent, clearErrors, tokenStillAvailable} = this.props;
+
+            /* check if there is a token & if token is not expired => triggers reducer action */
             if (tokenStillAvailable()) {
                 const data = this.dataFromFields();
+
+                /* clear api & server errors => triggers reducer action */
                 clearErrors();
+
+                /* creates event and adds response to loaded events => triggers reducer action */
                 addEvent(data);
             }
         }
@@ -34,6 +44,8 @@ class EventModal extends FormClass {
 
     dataFromFields = () => {
         const {title, description, capacity, startsAt, time} = this.state;
+
+        /* build event starting date from date and time props */
         const t = time.value.split(':');
         startsAt.setHours(t[0]);
         startsAt.setMinutes(t[1]);

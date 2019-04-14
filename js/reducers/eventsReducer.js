@@ -5,9 +5,12 @@ const events = (state = [], action) => {
         return action.payload;
     }
     if (action.type === UPDATE_EVENT_IN_EVENTS) {
+        /* action.payload ===updated event  */
         const newState = [...state];
         const updatedEvent = action.payload;
         const evtIndex = newState.findIndex(evt => evt.id === updatedEvent.id);
+
+        /* replace old instance of event with updated one */
         newState.splice(evtIndex, 1, updatedEvent);
         return newState;
     }

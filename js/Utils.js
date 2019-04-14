@@ -47,23 +47,33 @@ export const isDateFuture = date => {
 };
 
 export const getUserToken = () => localStorage.getItem('userToken');
+
+/* returns user object */
 export const getUserFromToken = () => jwt.decode(getUserToken()).user;
+
+/* returns token expiration date */
 export const getExpFromToken = () => jwt.decode(getUserToken()).exp;
+
 export const setUserToken = token => localStorage.setItem('userToken', token);
 
+/* check if token has not expired */
 export const tokenStillValid = () => {
     const dateFromToken = new Date(getExpFromToken() * 1000);
     return dateFromToken.getTime() > new Date().getTime();
 };
+
+/* check if there is any userToken in the localStorage & if it's not expired */
 export const tokenAvailable = () => (getUserToken() ? !!tokenStillValid() : false);
 
 export const removeUserToken = () => localStorage.removeItem('userToken');
 
+/* return true if string contains no whitespace */
 export const stringNoWhitespace = string => /^(\w+?)$/u.test(string);
 export const validateEmail = string => /^[a-z](\w*)+@strv.com/iu.test(string);
 
 export const firstLetterUppercase = string => string.charAt(0).toUpperCase() + string.slice(1);
 
+/* returns string from date formatted accord with event card design */
 export const dateToString = evtDate => {
     const options = {
         timeZone: 'Europe/Prague',
@@ -77,3 +87,4 @@ export const dateToString = evtDate => {
     const formatedDate = new Intl.DateTimeFormat('en-US', options).format(date, options);
     return formatedDate.replace(/,([^,]*)$/u, ' - $1');
 };
+export const shortenText = str => str.slice(0, 30).concat('...');
