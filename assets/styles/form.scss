@@ -58,9 +58,6 @@
     &::placeholder{
       color:$silver-three;
       font-size: 1em;
-      /*
-      font-size: 1rem;
-      */
       letter-spacing: initial;
     }
     &::placeholder::first-letter{
@@ -119,14 +116,12 @@
 }
 
 
-/* for edge: can't style placeholder separate from input
-  so don't style password input separately
- */
 
-@supports (-ms-ime-align:auto) {
-  .login__form--input[type="password"]{
+@supports (-ms-ime-align: auto) {
+
+  .form-component__input[type="password"] {
     letter-spacing: 0;
-    font-size: 1em;
+    font-size: 1.1rem;
     height: auto;
 
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import "styles/pageLayoutPlaceholder";
+import "styles/placeholders/pageLayoutPlaceholder";
 
 const LoginPlaceholder = () => (
   <div className="pageLayout">

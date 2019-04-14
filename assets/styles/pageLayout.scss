@@ -139,7 +139,15 @@
 
             }
         }
+        @supports (-ms-ime-align: auto) {
 
+            .form-component__input[type="password"] {
+                letter-spacing: 0;
+                font-size: 1.1rem;
+                height: auto;
+
+            }
+        }
 
     }
 

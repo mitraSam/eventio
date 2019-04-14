@@ -309,7 +309,6 @@ $large-vw:80em;
   }
 }
 
-@import "main";
 
 .events.error{
   display: flex;
@@ -350,7 +349,7 @@ $large-vw:80em;
     background-position: center;
     background-color: transparent;
     background-size:.9em .9em;
-    background-image: url("../images/close-icon.svg");
+    background-image: url("../../images/close-icon.svg");
     width: 2em;
     height: 2em;
     background-repeat: no-repeat;
@@ -369,7 +368,7 @@ $large-vw:80em;
     line-height: 2.1;
     border-radius: 50%;
     font-size: 1.8em;
-    font-family: $main-font-light;
+    font-family: Trebuchet;
     margin: .5em;
     box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.15);
     position: fixed;

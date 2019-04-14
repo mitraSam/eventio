@@ -25,8 +25,6 @@
       color: $dark-grey;
     }
   }
-
-
   &__filter-menu-m {
     &__drop {
       display: none;
@@ -37,14 +35,12 @@
         padding-left: .2em;
       }
     }
-
     &__title-btn::after {
       @include arrow($dark-grey, .4em,"down");
       vertical-align: middle;
       margin-left: 5px;
       margin-bottom: 2px;
     }
-
     button {
       text-transform: uppercase;
       color: #323c46;
@@ -56,7 +52,6 @@
         font-family:$main-font-semiBold;
       }
     }
-
 
     &__drop.open {
       display: inline-block;
@@ -71,7 +66,6 @@
       }
     }
   }
-
 
   &__layout-menu{
     display: flex;
@@ -101,10 +95,7 @@
       margin-top:1px;
     }
   }
-
-
 }
-
 @media screen and (min-width: $small-vw) {
   .events {
     &__filter-menu-m{
@@ -123,8 +114,6 @@
     }
   }
 }
-
-
 @media screen and (min-width: $medium-vw) {
   .events {
     &__header{

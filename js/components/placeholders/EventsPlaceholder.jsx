@@ -1,5 +1,5 @@
 import React from "react";
-import "styles/eventsPlaceholder";
+import "styles/placeholders/eventsPlaceholder";
 
 const EventsPlaceholder = () => (
   <div className="events wrapper ">

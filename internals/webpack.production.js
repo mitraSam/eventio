@@ -43,25 +43,6 @@ module.exports = {
       }
     ]
   },
-  output: {
-    filename: "[name].[contenthash].js"
-  },
-  optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        sourceMap: true,
-        uglifyOptions: {
-          compress: {
-            inline: false
-          }
-        }
-      })
-    ],
-    runtimeChunk: false,
-    splitChunks: {
-      chunks: "all"
-    }
-  },
   plugins: [
     MiniCssPlugin,
     OptimizeCSSPlugin,
@@ -74,12 +55,6 @@ module.exports = {
       "process.env": {
         NODE_ENV: JSON.stringify("production")
       }
-    }),
-    new HtmlWebpackPlugin({
-      hash: true,
-      filename: "index.html",
-      title: "Eventio",
-      template: "./assets/index.html"
     })
   ]
 };

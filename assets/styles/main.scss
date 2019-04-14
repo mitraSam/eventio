@@ -2,75 +2,9 @@
 @import "fonts";
 @import "mixins";
 
-:root {
-
-  --white: #ffffff;
-
-  --greenblue-two: #21cf83;
-
-  --warm-pink: #ff4081;
-
-  --silver-two: #d2d6da;
-
-  --pale-grey: #dae1e7;
-
-  --silver-three: #c9ced3;
-
-  --dark-mint-green: #20be78;
-
-  --gunmetal: #555d5a;
-
-  --cool-grey-two: #9ca5af;
-
-  --dark-mint-green-two: #20bd78;
-
-  --darkish-pink: #e73370;
-
-  --silver-four: #c4c9d1;
-
-  --silver-five: #ccd0d9;
-
-  --silver-six: #e1e4e6;
-
-  --pale-grey-two: #f9f9fb;
-
-  --silver-seven: #cacdd0;
-
-  --warm-grey: #7d7878;
-
-  --black: #000000;
-
-  --red-pink: #fc226e;
-
-  --dark-slate-blue: #1c4267;
-
-  --black-24: rgba(0, 0, 0, 0.24);
-
-  --aqua-green: #1be38b;
-
-  --silver: #d9dce1;
-
-  --cool-grey-three: #a9aeb4;
-
-  --cool-grey: #949ea8;
-
-  --greenblue: #22d486;
-
-}
-
 /* Text styles */
 
-%Text-Style-3 {
-  font-family: CircularProTT;
-  font-size: 30px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #323c46;
 
-}
 
 %Text-Style-4 {
   font-family: Hind;

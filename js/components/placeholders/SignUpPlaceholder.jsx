@@ -1,12 +1,12 @@
 import React from "react";
-import "styles/pageLayoutPlaceholder";
+import "styles/placeholders/pageLayoutPlaceholder";
 
 const SignUpPlaceholder = () => (
   <div className="pageLayout">
     <header className="mainHeader">
       <nav className="mainHeader__nav">
         <a className="mainHeader__logo" rel="home" href="/">
-          E.asdasd
+          E
         </a>
         <ul className="mainHeader__nav__menu hideOnMobile">
           <li className="mainHeader__nav__link-container">
