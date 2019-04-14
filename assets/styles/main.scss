@@ -153,6 +153,12 @@ a{
   color:white;
 
 }
+%event-button--packed{
+  @extend %event-button;
+  background-color:$dark-grey;
+  color:white;
+
+}
 
 button{
   background: none;

@@ -60,6 +60,9 @@
     &__btn-expired{
       @extend %event-button--expired
     }
+    &__btn-packed{
+      @extend %event-button--expired
+    }
   }
 
   &__card.row {

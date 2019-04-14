@@ -59,10 +59,13 @@ class Events extends Component {
   handleOpenEvtModal = () => this.setState({ activeEvtModal: true });
 
   parseDate = evtDate => dateToString(evtDate);
-  setEvtBtn(id, attendees, start) {
+  setEvtBtn(id, attendees, start, capacity) {
     const { currentUser } = this.props;
     if (!isDateFuture(new Date(start))) {
       return { type: "expired", method: "" };
+    }
+    if (attendees.length === capacity) {
+      return { type: "packed", method: "" };
     }
     const type =
       currentUser.id === id
@@ -141,7 +144,8 @@ class Events extends Component {
                       button={this.setEvtBtn(
                         evt.owner.id,
                         evt.attendees,
-                        evt.startsAt
+                        evt.startsAt,
+                        evt.capacity
                       )}
                       layout={activeLayout}
                       id={evt.id}
