@@ -10,6 +10,8 @@
   "rules": {
     "import/no-unresolved": "off",
     "no-shadow": "off"
+
+
   },
   "plugins": ["react", "import", "jsx-a11y"],
   "parser": "babel-eslint",

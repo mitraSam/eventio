@@ -8,10 +8,9 @@ import {
 } from "../Utils";
 class FormClass extends Component {
   finishAuth = response => {
-    const { setUser, history } = this.props;
+    const { setUser } = this.props;
     setUserToken(response.headers.authorization);
     setUser(getUserFromToken());
-    history.push("/events");
   };
 
   handleText = ({ target }) => {
@@ -133,8 +132,7 @@ class FormClass extends Component {
 }
 
 FormClass.propTypes = {
-  setUser: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  setUser: PropTypes.func.isRequired
 };
 
 export default FormClass;

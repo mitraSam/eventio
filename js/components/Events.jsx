@@ -21,8 +21,6 @@ class Events extends Component {
   };
 
   componentDidMount() {
-    const { tokenStillAvailable, history } = this.props;
-    if (!tokenStillAvailable()) return history.push("/login");
     const { getEvents } = this.props;
     getEvents();
   }
@@ -80,10 +78,10 @@ class Events extends Component {
     const id = target.dataset["id"];
     const action = target.dataset["action"];
     const apiParam = `events/${id}/attendees/me`;
-    const { tokenStillAvailable, history, joinEvt, leaveEvt } = this.props;
+    const { tokenStillAvailable, joinEvt, leaveEvt } = this.props;
     if (tokenStillAvailable()) {
       action === "join" ? joinEvt(apiParam) : leaveEvt(apiParam);
-    } else history.push("/login");
+    }
   };
 
   closeModal = () => {
@@ -100,10 +98,9 @@ class Events extends Component {
       activeEvtModal,
       serverError
     } = this.state;
-    const { history, events } = this.props;
     const open = showDropdown ? "open" : "";
     const activeEvt = activeEvtModal ? "openModal" : "";
-
+    const { events } = this.props;
     if (serverError)
       return (
         <div className="events error">
@@ -112,7 +109,7 @@ class Events extends Component {
       );
     return (
       <div className={`events wrapper ${activeEvt}`}>
-        <Header history={history} isOnAuth={activeEvt ? true : ""} />
+        <Header isOnAuth={activeEvt ? true : ""} />
         {!activeEvtModal && (
           <main>
             <EventsHeader
@@ -165,7 +162,6 @@ class Events extends Component {
           <EventModal
             handleCloseModal={this.closeModal}
             apiError={this.props.apiError}
-            history={history}
             tokenStillAvailable={this.props.tokenStillAvailable}
             createEvt={this.props.createEvt}
             clearErrors={this.props.clearErrors}
@@ -185,7 +181,6 @@ Events.propTypes = {
   createEvt: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
   apiError: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired,
   events: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired
 };

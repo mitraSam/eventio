@@ -15,8 +15,7 @@ class Login extends FormClass {
   };
 
   componentDidMount() {
-    const { history, currentUser, clearErrors } = this.props;
-    if (currentUser.id) history.push("/events");
+    const { clearErrors } = this.props;
     clearErrors();
   }
 
@@ -25,9 +24,9 @@ class Login extends FormClass {
     if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
       const { password, email } = this.state;
       const data = { password: password.value, email: email.value };
-      const { setUser, history, clearErrors } = this.props;
+      const { setUser, clearErrors } = this.props;
       clearErrors();
-      setUser(data, history);
+      setUser(data);
     }
   };
 
@@ -106,7 +105,6 @@ class Login extends FormClass {
 }
 
 Login.propTypes = {
-  history: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   apiError: PropTypes.string.isRequired,
   serverError: PropTypes.bool.isRequired,

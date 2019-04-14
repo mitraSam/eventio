@@ -47,13 +47,12 @@ export const handleAddEventError = dispatch => err => {
   });
 };
 
-export const doAuthentication = (data, history, type) => dispatch => {
+export const doAuthentication = (data, type) => dispatch => {
   const param = type === "create" ? "users" : "auth/native";
   postData(param, data)
     .then(res => {
       setUserToken(res.headers.authorization);
       dispatch(setCurrentUser(getUserFromToken()));
-      if (history) history.push("/events");
     })
     .catch(handleError(dispatch));
 };

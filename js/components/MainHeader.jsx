@@ -9,16 +9,13 @@ class MainHeader extends Component {
   state = {
     showDropdown: false
   };
-  componentDidMount() {
-    this.props.tokenStillAvailable();
-  }
+
   handleDropdown = () =>
     this.setState(prev => ({ showDropdown: !prev.showDropdown }));
 
   handleLogout = () => {
-    const { logout, history } = this.props;
+    const { logout } = this.props;
     logout();
-    history.push("/login");
   };
 
   render() {
@@ -98,7 +95,6 @@ MainHeader.propTypes = {
   tokenStillAvailable: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   isOnAuth: PropTypes.string,
   isOnSignup: PropTypes.bool
 };

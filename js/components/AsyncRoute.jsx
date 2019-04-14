@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types"; // ES6
 
 import EventsPlaceholder from "./placeholders/EventsPlaceholder";
-import WithCurrentUser from "../containers/WithCurrentUser";
 import SignUpPlaceholder from "./placeholders/SignUpPlaceholder";
 import LoginPlaceholder from "./placeholders/LoginPlaceholder";
-import { Redirect } from "react-router";
 
 class AsyncRoute extends Component {
   state = {
@@ -32,13 +30,6 @@ class AsyncRoute extends Component {
   }
 
   render() {
-    const { isPrivate, currentUser, isPublic } = this.props;
-    if (isPrivate && !currentUser.id) {
-      return <Redirect to="/login" />;
-    }
-    if (isPublic && currentUser.id) {
-      return <Redirect to="/events" />;
-    }
     const { loaded } = this.state;
     const { props } = this.props;
 
@@ -58,7 +49,6 @@ AsyncRoute.propTypes = {
   path: PropTypes.string,
   props: PropTypes.object.isRequired,
   isPrivate: PropTypes.bool,
-  currentUser: PropTypes.object.isRequired,
   isPublic: PropTypes.bool
 };
-export default WithCurrentUser(AsyncRoute);
+export default AsyncRoute;

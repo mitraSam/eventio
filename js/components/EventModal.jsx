@@ -15,21 +15,19 @@ class EventModal extends FormClass {
     startsAt: ""
   };
 
+  componentDidMount() {
+    const { clearErrors } = this.props;
+    clearErrors();
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
-      const {
-        addEvent,
-        clearErrors,
-        tokenStillAvailable,
-        history
-      } = this.props;
+      const { addEvent, clearErrors, tokenStillAvailable } = this.props;
       if (tokenStillAvailable()) {
         const data = this.dataFromFields();
         clearErrors();
         addEvent(data);
-      } else {
-        history.push("/login");
       }
     }
   };

@@ -17,8 +17,7 @@ class SignUp extends FormClass {
   };
 
   componentDidMount() {
-    const { history, currentUser, clearErrors } = this.props;
-    if (currentUser.id) history.push("/events");
+    const { clearErrors } = this.props;
     clearErrors();
   }
 
@@ -26,9 +25,9 @@ class SignUp extends FormClass {
     e.preventDefault();
     if (!this.checkForEmptyInputs(Array.from(e.target.elements))) {
       const data = this.dataFromFields();
-      const { clearErrors, setUser, history } = this.props;
+      const { clearErrors, setUser } = this.props;
       clearErrors();
-      setUser(data, history, "create");
+      setUser(data, "create");
     }
   };
 
@@ -167,7 +166,6 @@ class SignUp extends FormClass {
 }
 
 SignUp.propTypes = {
-  history: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   apiError: PropTypes.string.isRequired,
   serverError: PropTypes.bool.isRequired,

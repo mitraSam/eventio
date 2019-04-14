@@ -107,6 +107,9 @@ a{
   border-radius: 4px;
   letter-spacing: 1px;
   text-transform: uppercase;
+  &:active{
+    background: $dark-mint-green-two;
+  }
 }
 
 
@@ -124,7 +127,7 @@ a{
   @extend %event-button;
   background-color:$greenblue;
   color:white;
-  &:active,&:focus{
+  &:active{
     background: $dark-mint-green-two;
   }
 }
