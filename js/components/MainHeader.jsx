@@ -23,7 +23,6 @@ class MainHeader extends Component {
         const {showDropdown} = this.state;
         const hideOnMobile = isOnAuth ? 'hideOnMobile' : '';
         const hideDropdown = showDropdown ? '' : 'hide';
-        console.log(isOnSignup);
         const link = isOnSignup ? (
             <Link className="mainHeader__nav__link" to="/login">
                 Already have an account?<em> Sign in</em>

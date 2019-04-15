@@ -73,7 +73,7 @@ dev: for starting the app in development mode, it starts webpack-dev-server with
 lint:fix: lint the js/jsx code
 
 pre-commit hooks:
-lint and prettier are run pre-commit
+prettier is run pre-commit on staged files
 
 Components:
 
