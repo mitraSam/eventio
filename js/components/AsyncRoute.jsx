@@ -28,7 +28,7 @@ class AsyncRoute extends Component {
 
         if (path === 'events') return <EventsPlaceholder />;
         if (path === '/') return <SignUpPlaceholder />;
-        if (path === '/login') return <LoginPlaceholder />;
+        if (path === 'login') return <LoginPlaceholder />;
         return '';
     }
     render() {

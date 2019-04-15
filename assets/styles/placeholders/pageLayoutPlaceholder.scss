@@ -1,480 +1,427 @@
-
+@import '../reset';
 $silver: #d9dce1;
 $silver: #d9dce1;
 $cool-grey-two: #9ca5af;
 $cool-grey-three: #a9aeb4;
 $dark-grey: #323c46;
-$light-green: rgb(34,212,134);
-$lighter-grey:rgb(213,217,221);
+$light-green: rgb(34, 212, 134);
+$lighter-grey: rgb(213, 217, 221);
 $red-pink: #fc226e;
-$silver-three:#c9ced3;
-$light-grey:rgb(149,159,169);
+$silver-three: #c9ced3;
+$light-grey: rgb(149, 159, 169);
 $cool-grey: #949ea8;
-$greenblue:#22d486;
+$greenblue: #22d486;
 
+$small-vw: 40em;
+$medium-vw: 60em;
+$large-vw: 80em;
 
-$small-vw:40em;
-$medium-vw:60em;
-$large-vw:80em;
-
-
-
-%submit-button{
-  width: 15em;
-  font-family: Trebuchet;
-  font-size: 1em;
-  background:$greenblue;
-  color:white;
-  padding: 1em;
-  border-radius: 4px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-
-@function shade($color, $percentage) {
-  @return mix(black, $color, $percentage);
-}
-
-.mainHeader {
-  padding: 2em 2em 0;
-  margin-bottom: 3.5em;
-  .hideOnMobile{
-    display: none;
-  }
-  &__nav {
-    display: flex;
-    &__menu {
-      display: flex;
-      margin-left: auto;
-      position: relative;
-    }
-    &__link-menu--hide{
-      display: none;
-    }
-    &__link-container{
-      display: flex;
-      align-items: center;
-    }
-    &__link-container.initials{
-      width: 2em;
-      height: 2em;
-      background: $silver;
-      border-radius: 50%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-content: center;
-      margin-right: .5em;
-      span{
-        color:$cool-grey;
-        font-size: .7em;
-        font-family: Trebuchet;
-      }
-    }
-    &__link-container.arrow{
-      background: none;
-      border: none;
-      button{
-        display: flex;
-        justify-content: center;
-        width: 1em;
-        height: 2.5em;
-        align-items: center;
-      }
-
-    }
-    &__link-container.arrow:hover{
-      cursor: pointer;
-    }
-
-    &__link-container.name{
-      font-family: Trebuchet;
-      font-size: .73em;
-      color:$cool-grey;
-      margin-right: .5em;
-    }
-    &__link-container.logout{
-      position: absolute;
-      top: 2.2em;
-      right: 0;
-      border-radius: 10px;
-      padding: .3em .4em;
-      width: 10em;
-      text-align: right;
-      color: #323c46;
-      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
-      button{
-        cursor: pointer;
-        font-size: .88em;
-        color:$cool-grey-two;
-        width: 100%;
-        text-align: left;
-      }
-    }
-    &__link-container.logout.hide{
-      display: none;
-    }
-
-    &__link{
-      font-size: .9rem;
-      font-family: Trebuchet;
-      color:$silver-three;
-      em{
-        font-weight: 600;
-        color: $cool-grey;
-
-        text-transform: uppercase;
-      }
-    }
-
-  }
-  &__logo {
-    font-family:Trebuchet;
-    color: var(--dark-grey);
-    text-decoration: none;
-    font-size: 1.9rem;
-  }
-}
-
-@media screen and (min-width: $small-vw){
-  .mainHeader {
-    font-size:1.22em;
-  }
-}
-@media screen and (min-width: $large-vw) {
-  .mainHeader {
-    padding: 2em 3em 0;
-    width: 100%;
-    z-index: 2;
-    .hideOnMobile {
-      display: flex;
-    }
-    &__nav {
-      display: flex;
-      justify-content: space-between;
-      &__link {
-        .hideOnMobile{
-          display: inline-block;
-        }
-      }
-    }
-
-  }
-}
-
-
-.pageLayout{
-  &__content{
-    text-align:center;
-    padding: 0 2em;
-  }
-  &__banner{
-    display: none;
-
-  }
-  &__refresh{
+%submit-button {
     width: 15em;
+    font-family: Arial;
     font-size: 1em;
-    color:white;
+    background: $greenblue;
+    color: white;
     padding: 1em;
     border-radius: 4px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background:$dark-grey
-  }
 }
 
-@media screen and (min-width: $small-vw) {
-  .pageLayout{
-    max-width: 70vw;
-    margin-left: auto;
-    margin-right: auto;
-    &__content{
-      font-size: 1.25em;
-    }
-    .form-component__input::placeholder {
-      font-size: 1.1rem;
-    }
-  }
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
 }
 
-
-@media screen and (min-width: $large-vw) {
-
-  .pageLayout{
-    margin: initial;
-    display: flex;
-    max-width: initial;
-    height: 100vh;
-    .mainHeader{
-      position: absolute;
-      &__logo{
-        color:#fff;
-      }
-    }
-    main {
-      display: flex;
-      flex: 1;
-    }
-    &__content{
-      display: flex;
-      width: 65vw;
-      padding-left: 0;
-      align-content: center;
-      align-items: center;
-      text-align: left;
-      font-size: 1em;
-      position: relative;
-    }
-    &__banner{
-      display: flex;
-      align-items: end;
-      width: 33vw;
-      justify-content: center;
-      text-align: center;
-      flex: 1;
-      color:#fff;
-      padding: 4.5vw;
-      background-color: shade($dark-grey,10%);
-      background-position: center center;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      blockquote{
-        margin-top: auto;
-      }
-      p{
-        font-family: Trebuchet;
-        font-size: 2.3em;
-        margin-bottom: .8em;
-      }
-      hr{
-        width: .7em;
-        border:none;
-        height: 2px;
-        background: $light-green;
-      }
-      cite{
-        color:$light-grey;
-        margin-top:.5em;
-        font-size: .9em;
-      }
-    }
-
-    .form-component{
-      width: 30em;
-      margin-left: 18vw;
-      legend{
-        text-align: left;
-      }
-      sub{
-        text-align: left;
-      }
-      &__submit{
-        margin-left: initial;
-        padding: 1em;
-        font-size: 1rem;
-        margin-bottom: 0;
-      }
-      &__input::placeholder{
-        font-size: 1rem;
-      }
-      sub{
-        font-size: 1.124em;
-      }
-      &__input{
-        font-size: 1.124em;
-      }
-      &__input[type="password"]{
-        font-size: .7em;
-      }
-      &__input[type="password"]::placeholder{
-        font-size: 1.4em;
-      }
-      &__annot{
-        font-size: .88em;
-      }
-      legend{
-        font-size: 1.75em;
-      }
-      &__apiError{
-        text-align: left;
-        font-size: 1.12em;
-      }
-
-      &__bottomLink{
+.mainHeader--placeholder {
+    padding: 2em 2em 0;
+    margin-bottom: 3.5em;
+    .hideOnMobile {
         display: none;
-
-      }
     }
-  }
+    &__nav {
+        display: flex;
+        &__menu {
+            display: flex;
+            margin-left: auto;
+            position: relative;
+        }
+        &__link-menu--hide {
+            display: none;
+        }
+        &__link-container {
+            display: flex;
+            align-items: center;
+        }
+        &__link-container.initials {
+            width: 2em;
+            height: 2em;
+            background: $silver;
+            border-radius: 50%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            margin-right: 0.5em;
+            span {
+                color: $cool-grey;
+                font-size: 0.7em;
+                font-family: Arial;
+            }
+        }
+        &__link-container.arrow {
+            background: none;
+            border: none;
+            button {
+                display: flex;
+                justify-content: center;
+                width: 1em;
+                height: 2.5em;
+                align-items: center;
+            }
+        }
+        &__link-container.arrow:hover {
+            cursor: pointer;
+        }
+
+        &__link-container.name {
+            font-family: Arial;
+            font-size: 0.73em;
+            color: $cool-grey;
+            margin-right: 0.5em;
+        }
+        &__link-containerlogout {
+            position: absolute;
+            top: 2.2em;
+            right: 0;
+            border-radius: 10px;
+            padding: 0.3em 0.4em;
+            width: 10em;
+            text-align: right;
+            color: #323c46;
+            box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+            button {
+                cursor: pointer;
+                font-size: 0.88em;
+                color: $cool-grey-two;
+                width: 100%;
+                text-align: left;
+            }
+        }
+        &__link-container.logout.hide {
+            display: none;
+        }
+
+        &__link {
+            font-size: 0.9rem;
+            font-family: Arial;
+            color: $silver-three;
+            em {
+                font-weight: 600;
+                color: $cool-grey;
+
+                text-transform: uppercase;
+            }
+        }
+    }
 }
 
+.pageLayout--placeholder {
+    &__content {
+        text-align: center;
+        padding: 0 2em;
+    }
+    &__banner {
+        display: none;
+    }
+    &__refresh {
+        width: 15em;
+        font-size: 1em;
+        color: white;
+        padding: 1em;
+        border-radius: 4px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: $dark-grey;
+    }
+}
 
-
-
-.form-component {
-  margin: 2em auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 90vw;
-
-  p{
+.form-component--placeholder {
+    margin: 2em auto;
     display: flex;
     flex-direction: column;
-  }
-  .error &__input {
-    border-bottom: 1px solid $red-pink;
-  }
-  legend{
-    font-size: 1.4em;
-    margin-bottom: .7em;
-    text-align: center;
-  }
-  sub{
-    color: $cool-grey;
-    font-size: .9em;
-    margin-bottom: 3em;
-    text-align: center;
-  }
+    max-width: 90vw;
 
-
-  &__input {
-    display: block;
-    color: var(--dark-grey);
-    margin: 0 0 .5em;
-    font-size: 1.12em;
-    border: none;
-    border-bottom: 1px solid $silver-three;
-    padding-bottom: .2em;
-    &:focus {
-      outline: none;
-      border-bottom: 1px solid $dark-grey;
+    p {
+        font-family: Arial;
+        display: flex;
+        flex-direction: column;
+    }
+    .error &__input {
+        border-bottom: 1px solid $red-pink;
+    }
+    legend {
+        font-family: Arial;
+        font-size: 1.4em;
+        margin-bottom: 0.7em;
+        text-align: center;
+    }
+    sub {
+        font-family: Arial;
+        color: $cool-grey;
+        font-size: 0.9em;
+        margin-bottom: 3em;
+        text-align: center;
     }
 
-    &[type="password"] {
-      letter-spacing: 5px;
-      font-size: .7em;
+    &__input {
+        font-family: Arial;
+        display: block;
+        color: var(--dark-grey);
+        margin: 0 0 0.5em;
+        font-size: 1.12em;
+        border: none;
+        border-bottom: 1px solid $silver-three;
+        padding-bottom: 0.2em;
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $dark-grey;
+        }
+
+        &[type='password'] {
+            letter-spacing: 5px;
+            font-size: 0.7em;
+            /*
       height: 2.5em;
-    }
+      */
+        }
 
-    @supports (-ms-ime-align:auto) {
-      letter-spacing: 0;
-      font-size: 1em;
-      height: auto;
-    }
+        @supports (-ms-ime-align: auto) {
+            letter-spacing: 0;
+            font-size: 1em;
+            height: auto;
+        }
 
-    &[type="password"]::placeholder{
-      font-size: 1.1rem;
-    }
-    &::placeholder{
-      color:$silver-three;
-      font-size: 1em;
-      /*
+        &[type='password']::placeholder {
+            font-size: 1.1rem;
+        }
+        &::placeholder {
+            color: $silver-three;
+            font-size: 1em;
+            /*
       font-size: 1rem;
       */
-      letter-spacing: initial;
+            letter-spacing: initial;
+        }
+        &::placeholder::first-letter {
+            text-transform: uppercase;
+        }
     }
-    &::placeholder::first-letter{
-      text-transform: uppercase;
+    &__input.error {
+        border-bottom: 1px solid $red-pink;
     }
-  }
-  &__input.error{
-    border-bottom: 1px solid $red-pink;
-
-  }
-  &__apiError{
-    color:$red-pink;
-    font-size:1.12em;
-    line-height: 1.2;
-    margin-bottom: 3em;
-    text-align: center;
-  }
-  &__bottomLink{
-    color: $lighter-grey;
-    font-size: .9em;
-    margin-top:2.5em;
-    text-decoration: none;
-    text-align: center;
-    em {
-      color: $light-grey;
-      font-family: Trebuchet;
-      text-transform: uppercase;
+    &__apiError {
+        color: $red-pink;
+        font-size: 1.12em;
+        line-height: 1.2;
+        margin-bottom: 3em;
+        text-align: center;
     }
-  }
-  &__submit{
-    @extend %submit-button;
-    margin: 2.5em auto;
-
-
-  }
-  &__annot {
-    text-align: left;
-    font-family: Trebuchet;
-    color: $lighter-grey;
-    font-size: .9em;
-    min-height: 1em;
-  }
-  &__annot:first-letter{
-    text-transform: uppercase;
-  }
-  &__input-error{
-    color: $red-pink;
-    font-size: 1.12em;
-    min-height: 1em;
-    margin-bottom: .7em;
-    text-align: left;
-  }
-  .form-component__annot:first-letter{
-    text-transform: uppercase;
-  }
+    &__bottomLink {
+        color: $lighter-grey;
+        font-size: 0.9em;
+        margin-top: 2.5em;
+        text-decoration: none;
+        font-family: Arial;
+        text-align: center;
+        em {
+            color: $light-grey;
+            font-family: Arial;
+            text-transform: uppercase;
+        }
+    }
+    &__submit {
+        @extend %submit-button;
+        margin: 2.5em auto;
+    }
+    &__annot {
+        text-align: left;
+        font-family: Arial;
+        color: $lighter-grey;
+        font-size: 0.9em;
+        min-height: 1em;
+    }
+    &__annotfirst-letter {
+        text-transform: uppercase;
+    }
+    &__input-error {
+        color: $red-pink;
+        font-size: 1.12em;
+        min-height: 1em;
+        margin-bottom: 0.7em;
+        text-align: left;
+    }
+    .form-component__annot:first-letter {
+        text-transform: uppercase;
+    }
 }
-
 
 /* for edge: can't style placeholder separate from input
   so don't style password input separately
  */
 
-@supports (-ms-ime-align:auto) {
-  .login__form--input[type="password"]{
-    letter-spacing: 0;
-    font-size: 1em;
-    height: auto;
+@media screen and (min-width: $small-vw) {
+    .mainHeader--placeholder {
+        font-size: 1.22em;
+    }
 
-  }
+    .pageLayout--placeholder {
+        max-width: 70vw;
+        margin-left: auto;
+        margin-right: auto;
+        &__content {
+            font-size: 1.25em;
+        }
+        .form-component--placeholder__input::placeholder {
+            font-size: 1.1rem;
+        }
+    }
 }
-
-.on404,.error-display{
-  margin-top:4em;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  h1{
-    font-size: 1.75em;
-    margin-bottom: 1em;
-  }
-  p{
-    color: $cool-grey;
-    line-height: 1.33;
-  }
-  button{
-    @extend %submit-button;
-    background: #323c46;
-    margin-top: 2em;
-  }
-}
-
 @media screen and (min-width: $large-vw) {
-  .on404,.error-display{
-    text-align: left;
-    margin-top:0;
-    padding-left: 14em;
-    height: 27em;
+    .mainHeader--placeholder {
+        padding: 2em 3em 0;
+        max-width: 100%;
+        z-index: 2;
 
-  }
+        .hideOnMobile {
+            display: flex;
+        }
+        &__nav {
+            display: flex;
+            justify-content: space-between;
+            &__link {
+                .hideOnMobile {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    .pageLayout--placeholder {
+        margin: initial;
+        display: flex;
+        max-width: initial;
+        height: 100vh;
+        .mainHeader--placeholder {
+            position: absolute;
+            svg path {
+                fill: #fff;
+            }
+            &__nav__link {
+                position: fixed;
+                right: 4em;
+                text-decoration: none;
+            }
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+        }
+        &__content {
+            display: flex;
+            width: auto;
+            padding-left: 0;
+            align-content: center;
+            align-items: center;
+            text-align: left;
+            flex: 2;
+            font-size: 1em;
+            position: relative;
+        }
+        &__banner {
+            display: flex;
+            align-items: end;
+            width: auto;
+            justify-content: center;
+            text-align: center;
+            flex: 0.83;
+            color: #fff;
+            padding: 4.5vw;
+
+            background-image: none;
+            background-color: shade($dark-grey, 10%);
+            background-position: center center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            blockquote {
+                margin-top: auto;
+            }
+            p {
+                font-family: Trebuchet;
+                font-size: 2.3em;
+                margin-bottom: 0.8em;
+            }
+            hr {
+                width: 0.7em;
+                border: none;
+                height: 2px;
+                background: $light-green;
+            }
+            cite {
+                color: $light-grey;
+                margin-top: 0.5em;
+                font-size: 0.9em;
+            }
+        }
+
+        .form-component--placeholder {
+            width: 30em;
+            margin-left: 18vw;
+            legend {
+                text-align: left;
+            }
+            sub {
+                text-align: left;
+            }
+            &__submit {
+                margin-left: initial;
+                padding: 1em;
+                font-size: 1rem;
+                margin-bottom: 0;
+            }
+            &__input::placeholder {
+                font-size: 1rem;
+            }
+            sub {
+                font-size: 1.124em;
+            }
+            p {
+                margin-bottom: 0.45em;
+            }
+            &__input {
+                font-size: 1.124em;
+            }
+            &__input[type='password'] {
+                font-size: 0.7em;
+                padding-bottom: 0.7em;
+            }
+            &__input[type='password']::placeholder {
+                font-size: 1.4em;
+            }
+            &__annot {
+                font-size: 0.88em;
+            }
+            legend {
+                font-size: 1.75em;
+            }
+            &__apiError {
+                text-align: left;
+                font-size: 1.12em;
+            }
+
+            &__bottomLink {
+                display: none;
+            }
+        }
+    }
 }
-
-
-
-
