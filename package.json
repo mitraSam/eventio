@@ -77,7 +77,7 @@
     "test:coverage": "jest --coverage",
     "build:dev": "webpack -d",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
-    "precommit": "pretty-quick --staged  lint:fix"
+    "precommit": "pretty-quick --staged npm run lint:fix"
   },
   "jest": {
     "snapshotSerializers": [
