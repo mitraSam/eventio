@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import connect from 'react-redux/es/connect/connect';
 import {Redirect, Route, Switch} from 'react-router';
 import AsyncRoute from './AsyncRoute';
-import PropTypes from 'prop-types';
 
 class AppRouter extends Component {
     render() {
@@ -74,10 +73,6 @@ class AppRouter extends Component {
         );
     }
 }
-
-AppRouter.propTypes = {
-    currentUser: PropTypes.object.required,
-};
 
 const mapStateToProps = state => {
     return {

@@ -9,7 +9,8 @@
   ],
   "rules": {
     "import/no-unresolved": "off",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "react/prop-types": 0
 
 
   },

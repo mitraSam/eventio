@@ -1,129 +1,123 @@
-@import "main";
-
+@import 'main';
 
 .form-component {
-  margin: 2em auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 90vw;
-
-  p{
+    margin: 2em auto;
     display: flex;
     flex-direction: column;
-  }
-  .error &__input {
-    border-bottom: 1px solid $red-pink;
-  }
-  legend{
-    font-size: 1.4em;
-    margin-bottom: .7em;
-    text-align: center;
-  }
-  sub{
-    color: $cool-grey;
-    font-size: .9em;
-    margin-bottom: 3em;
-    text-align: center;
-  }
+    max-width: 90vw;
 
-
-  &__input {
-    display: block;
-    color: var(--dark-grey);
-    margin: 0 0 .5em;
-    font-size: 1.12em;
-    border: none;
-    border-bottom: 1px solid $silver-three;
-    padding-bottom: .2em;
-    &:focus {
-      outline: none;
-      border-bottom: 1px solid $dark-grey;
+    p {
+        display: flex;
+        flex-direction: column;
+    }
+    .error &__input {
+        border-bottom: 1px solid $red-pink;
+    }
+    legend {
+        font-size: 1.4em;
+        margin-bottom: 0.7em;
+        text-align: center;
+    }
+    sub {
+        color: $cool-grey;
+        font-size: 0.9em;
+        margin-bottom: 3em;
+        text-align: center;
     }
 
-    &[type="password"] {
-      letter-spacing: 5px;
-      font-size: .7em;
-      height: 2.5em;
-    }
+    &__input {
+        display: block;
+        color: var(--dark-grey);
+        margin: 0 0 0.5em;
+        font-size: 1.12em;
+        border: none;
+        border-bottom: 1px solid $silver-three;
+        padding-bottom: 0.2em;
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $dark-grey;
+        }
 
-    @supports (-ms-ime-align:auto) {
-      letter-spacing: 0;
-      font-size: 1em;
-      height: auto;
-    }
+        &[type='password'] {
+            letter-spacing: 5px;
+            font-size: 0.7em;
+            height: 2.5em;
+        }
 
-    &[type="password"]::placeholder{
-      font-size: 1.1rem;
-    }
-    &::placeholder{
-      color:$silver-three;
-      font-size: 1em;
-      letter-spacing: initial;
-    }
-    &::placeholder::first-letter{
-      text-transform: uppercase;
-    }
-  }
-  &__input.error{
-      border-bottom: 1px solid $red-pink;
+        @supports (-ms-ime-align: auto) {
+            letter-spacing: 0;
+            font-size: 1em;
+            height: auto;
+        }
 
-  }
-  &__apiError{
-    color:$red-pink;
-    font-size:1.12em;
-    line-height: 1.2;
-    margin-bottom: 3em;
-    text-align: center;
-  }
-  &__bottomLink{
-    color: $lighter-grey;
-    font-size: .9em;
-    margin-top:2.5em;
-    text-decoration: none;
-    text-align: center;
-    em {
-      color: $light-grey;
-      font-family: $main-font-medium;
-      text-transform: uppercase;
+        &[type='password']::placeholder {
+            font-size: 1.1rem;
+        }
+        &::placeholder {
+            color: $silver-three;
+            font-size: 1em;
+            letter-spacing: initial;
+        }
+        &::placeholder::first-letter {
+            text-transform: uppercase;
+        }
     }
-  }
-  &__submit{
-  @extend %submit-button;
-    margin: 2.5em auto;
-
-
-  }
-  &__annot {
-    text-align: left;
-    font-family: $main-font-light;
-    color: $lighter-grey;
-    font-size: .9em;
-    min-height: 1em;
-  }
-  &__annot:first-letter{
-    text-transform: uppercase;
-  }
-  &__input-error{
-    color: $red-pink;
-    font-size: 1.12em;
-    min-height: 1em;
-    margin-bottom: .7em;
-    text-align: left;
-  }
-  .form-component__annot:first-letter{
-    text-transform: uppercase;
-  }
+    &__input.error {
+        border-bottom: 1px solid $red-pink;
+    }
+    &__apiError {
+        color: $red-pink;
+        font-size: 1.12em;
+        line-height: 1.2;
+        margin-bottom: 3em;
+        text-align: center;
+    }
+    &__bottomLink {
+        color: $lighter-grey;
+        font-size: 0.9em;
+        margin-top: 2.5em;
+        text-decoration: none;
+        text-align: center;
+        em {
+            color: $light-grey;
+            font-family: $main-font-medium;
+            text-transform: uppercase;
+        }
+    }
+    &__submit {
+        @extend %submit-button;
+        margin: 2.5em auto;
+    }
+    &__annot {
+        text-align: left;
+        font-family: $main-font-light;
+        color: $lighter-grey;
+        font-size: 0.9em;
+        min-height: 1em;
+    }
+    &__annot:first-letter {
+        text-transform: uppercase;
+    }
+    &__input-error {
+        color: $red-pink;
+        font-size: 1.12em;
+        min-height: 1em;
+        margin-bottom: 0.7em;
+        text-align: left;
+        display: block;
+    }
+    &__input-error-container {
+        height: 1.82em;
+    }
+    .form-component__annot:first-letter {
+        text-transform: uppercase;
+    }
 }
-
-
 
 @supports (-ms-ime-align: auto) {
-
-  .form-component__input[type="password"] {
-    letter-spacing: 0;
-    font-size: 1.1rem;
-    height: auto;
-
-  }
+    .form-component__input[type='password'] {
+        letter-spacing: 0;
+        font-size: 1.1rem;
+        height: auto;
+    }
 }
-
