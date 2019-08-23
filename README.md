@@ -19,6 +19,8 @@ the events array is hooked with redux for shared state between components
 
 to be done:
 
+Form Class refactoring -- implement formik for login, signup && eventmodal components !!!
+
 Testing:
 
 implement testing for:
@@ -89,6 +91,7 @@ enables protected routes by displaying or redirecting routes according with
 currentUser value
 
 AsyncRoutes component:
+
 
 enables webpack to perform code splitting by dynamically loading component
 only when corresponding route is visited
