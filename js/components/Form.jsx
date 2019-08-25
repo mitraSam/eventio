@@ -33,6 +33,7 @@ const Form = ({schema, title, authError, clearErrors, handleFormSubmit, extraLin
                                     handleBlur={handleBlur}
                                     handleChange={handleChange}
                                     touched={touched}
+                                    placeholder={fieldName === 'passwordConfirmation' ? 'confirm password' : null}
                                 />
                             ))}
                             {extraLink && (
