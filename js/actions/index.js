@@ -11,6 +11,7 @@ import {
 import {postData, setUserToken, getUserFromToken, getData, getUserToken, deleteData, removeUserToken} from '../Utils';
 
 import {createApolloFetch} from 'apollo-fetch';
+import {signinQuery} from '../Queries';
 const {API_URI} = process.env;
 
 const apolloFetch = createApolloFetch({uri: API_URI});
@@ -21,12 +22,11 @@ export const clearErrors = () => dispatch => {
 };
 
 const handleError = dispatch => err => {
-    const {
-        errors: [{message}],
-    } = err;
-    if (!message) {
+    const {errors} = err;
+    if (!errors) {
         return dispatch(setServerError(true));
     }
+    const message = errors[0].message;
 
     /* if there is a default message provided for error type set apiError to reference it */
     dispatch(setApiError(message));
@@ -48,10 +48,7 @@ export const handleAddEventError = dispatch => err => {
 };
 
 export const doAuthentication = variables => dispatch => {
-    const query = `mutation signin($input:SigninInput!){
-  signin(input:$input)
-}`;
-    return apolloFetch({query, variables: {input: {...variables}}})
+    return apolloFetch({query: signinQuery, variables: {input: {...variables}}})
         .then(res => {
             if (res.errors) throw res;
             setUserToken(res.data.signin);
