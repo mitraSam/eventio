@@ -1,3 +1,5 @@
+/*eslint no-console: off*/
+
 import React, {Component} from 'react';
 import connect from 'react-redux/es/connect/connect';
 import {Redirect, Route, Switch} from 'react-router';

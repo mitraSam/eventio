@@ -19,11 +19,11 @@ const Form = ({schema, title, apiError, clearErrors, handleFormSubmit, extraLink
                 return (
                     <div>
                         <form id={`${title + 'Form'}`} className="form-component" onSubmit={handleSubmit}>
-                            {apiError && <span>{apiError}</span>}
                             <p>
                                 <legend>{title}</legend>
                                 <sub>enter your details bellow</sub>
                             </p>
+                            <span className="form-component__apiError">{apiError}</span>
                             {Object.keys(values).map(fieldName => (
                                 <Input
                                     key={fieldName}

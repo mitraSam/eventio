@@ -1,3 +1,5 @@
+/*eslint no-console: off*/
+
 import {
     setServerError,
     setApiError,
@@ -6,16 +8,12 @@ import {
     updateEventInEvents,
     addEventToEvents,
 } from './actionCreators';
-import {
-    postData,
-    setUserToken,
-    getUserFromToken,
-    apiErroMessages,
-    getData,
-    getUserToken,
-    deleteData,
-    removeUserToken,
-} from '../Utils';
+import {postData, setUserToken, getUserFromToken, getData, getUserToken, deleteData, removeUserToken} from '../Utils';
+
+import {createApolloFetch} from 'apollo-fetch';
+const {API_URI} = process.env;
+
+const apolloFetch = createApolloFetch({uri: API_URI});
 
 export const clearErrors = () => dispatch => {
     dispatch(setServerError(false));
@@ -23,18 +21,15 @@ export const clearErrors = () => dispatch => {
 };
 
 const handleError = dispatch => err => {
-    const {response} = err;
-    if (!response) {
-        dispatch(setServerError(true));
+    const {
+        errors: [{message}],
+    } = err;
+    if (!message) {
+        return dispatch(setServerError(true));
     }
-    const {error} = response.data;
 
     /* if there is a default message provided for error type set apiError to reference it */
-    if (apiErroMessages[error]) {
-        dispatch(setApiError(apiErroMessages[error]));
-    } else {
-        dispatch(setApiError(error));
-    }
+    dispatch(setApiError(message));
 };
 
 export const handleAddEventError = dispatch => err => {
@@ -52,12 +47,14 @@ export const handleAddEventError = dispatch => err => {
     });
 };
 
-export const doAuthentication = (data, type) => dispatch => {
-    const param = type === 'create' ? 'users' : 'auth/native';
-    postData(param, data)
+export const doAuthentication = variables => dispatch => {
+    const query = `mutation signin($input:SigninInput!){
+  signin(input:$input)
+}`;
+    return apolloFetch({query, variables: {input: {...variables}}})
         .then(res => {
-            /* set user auth token in localStorage, decode it and update store currentUser prop to reference the data object */
-            setUserToken(res.headers.authorization);
+            if (res.errors) throw res;
+            setUserToken(res.data.signin);
             dispatch(setCurrentUser(getUserFromToken()));
         })
         .catch(handleError(dispatch));

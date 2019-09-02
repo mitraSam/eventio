@@ -12,8 +12,8 @@ const mapStateToProps = state => {
     };
 };
 const mapDispatchToProps = dispatch => ({
-    setUser(data, history, param) {
-        dispatch(doAuthentication(data, history, param));
+    setUser(data) {
+        dispatch(doAuthentication(data));
     },
     tokenStillAvailable() {
         if (!tokenAvailable()) {

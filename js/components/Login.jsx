@@ -1,3 +1,4 @@
+/*eslint no-console: off*/
 import React, {Component} from 'react';
 import 'styles/form';
 import WithCurrentUser from '../containers/WithCurrentUser';
@@ -21,7 +22,6 @@ class Login extends Component {
 
     render() {
         const {apiError, serverError} = this.props;
-
         return (
             <div>
                 {!serverError && (
@@ -30,7 +30,7 @@ class Login extends Component {
                         clearErrors={this.props.clearErrors}
                         handleFormSubmit={this.handleSubmit}
                         title="Sign in to eventio"
-                        authError={apiError}
+                        apiError={apiError}
                         schema={schema.login}
                     />
                 )}
