@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import 'styles/form';
 import WithCurrentUser from '../containers/WithCurrentUser';
 import ErrorDisplay from './ErrorDisplay';
-import FormClass from './FormClass';
 import Form from './Form';
 import schema from './FormSchemas';
 
-class Login extends FormClass {
+class Login extends Component {
     componentDidMount() {
         const {clearErrors} = this.props;
         /* clear server & api errors => triggers reducer action */

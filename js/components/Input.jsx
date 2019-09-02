@@ -1,13 +1,14 @@
 import React from 'react';
+
 import {firstLetterUppercase} from '../Utils';
-const Input = ({errors, touched, handleChange, handleBlur, fieldName, value, placeholder}) => {
+const Input = ({errors, touched, handleChange, handleBlur, fieldName, value, placeholder, type}) => {
     return (
         <div>
             <p>
                 <input
                     id={fieldName}
                     placeholder={placeholder ? firstLetterUppercase(placeholder) : firstLetterUppercase(fieldName)}
-                    type="text"
+                    type={type}
                     value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}

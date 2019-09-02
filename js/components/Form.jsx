@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 
 import Input from './Input';
 
-const Form = ({schema, title, authError, clearErrors, handleFormSubmit, extraLink}) => (
+const Form = ({schema, title, apiError, clearErrors, handleFormSubmit, extraLink}) => (
     <div>
         <Formik
             validationSchema={schema.validation}
@@ -19,7 +19,7 @@ const Form = ({schema, title, authError, clearErrors, handleFormSubmit, extraLin
                 return (
                     <div>
                         <form id={`${title + 'Form'}`} className="form-component" onSubmit={handleSubmit}>
-                            {authError && <span>{authError}</span>}
+                            {apiError && <span>{apiError}</span>}
                             <p>
                                 <legend>{title}</legend>
                                 <sub>enter your details bellow</sub>
@@ -34,6 +34,11 @@ const Form = ({schema, title, authError, clearErrors, handleFormSubmit, extraLin
                                     handleChange={handleChange}
                                     touched={touched}
                                     placeholder={fieldName === 'passwordConfirmation' ? 'confirm password' : null}
+                                    type={
+                                        fieldName === 'password' || fieldName === 'passwordConfirmation'
+                                            ? 'password'
+                                            : 'text'
+                                    }
                                 />
                             ))}
                             {extraLink && (
